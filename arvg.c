@@ -95,7 +95,7 @@ void imprimeFigura(TAG *a){
 }
 
 
-void imprime(TAG *a){ //Aqui só imprimimos o principal da figura. caso queira melhorar com tabulação
+void imprime(TAG *a){ //Aqui só imprimimos o principal da figura. caso queira melhorar com tabulaçãoas
 	if(a){
 		printf("{ cód:%d, figura:%s }\n", a -> id, a -> nomeFigura);
 		if(a -> prim_filho) imprime(a -> prim_filho);

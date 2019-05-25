@@ -2,7 +2,7 @@
 #include"arvg.h"
 
 
-//amanhã faço o input p arquivo e p coisa simples. To com preguiça de testar agora.
+//amanhã faço o input p arquivo e p coisa simples. To com preguiça de testar agoraa.
 int main(){
 	char nome[3] = "TRA";
 	float dim1 = 1.0;
