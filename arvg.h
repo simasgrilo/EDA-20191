@@ -12,6 +12,10 @@ extern TAG* cria (void);
 extern TAG *busca (TAG*a, int idPai);
 extern TAG *insere(TAG* a, int id, int idPai, char* nome, float dim1, float dim2, float dim3);
 extern void imprime(TAG *a);
+extern void imprimeFigura(TAG *a);
+extern TAG* ler_de_arquivo(char *nome1, TAG *a);
+extern TAG *retira(TAG *a, int id);
+extern void libera(TAG * a);
 /*TAK *modificaNome(TAG *a, char *nome);a
 TAK *modificaUmaDim(TAG *a, float dim1);
 TAK *modificaDuasDim(TAG *a, float dim1,float dim2);
