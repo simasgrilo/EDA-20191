@@ -1,0 +1,18 @@
+
+#include<stdlib.h>
+#include<math.h>
+
+typedef struct arvg {
+	char nomeFigura[3];
+	int id, idPai;
+	float dim1, dim2, dim3;
+	struct arvg* prim_filho, *prox_irmao;
+}TAG;
+extern TAG* cria (void);
+extern TAG *busca (TAG*a, int idPai);
+extern TAG *insere(TAG* a, int id, int idPai, char* nome, float dim1, float dim2, float dim3);
+extern void imprime(TAG *a);
+/*TAK *modificaNome(TAG *a, char *nome);
+TAK *modificaUmaDim(TAG *a, float dim1);
+TAK *modificaDuasDim(TAG *a, float dim1,float dim2);
+TAK *modificaUmaDim(TAG *a, float dim1, float dim2, float dim3); */
