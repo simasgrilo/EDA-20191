@@ -139,7 +139,9 @@ int main(){
 		else if (choice == 'p'){
 			printf("Digite o código único: ");
 			scanf("%d",&id);
-			imprimeFigura(busca(a,id));
+			TAG *no = busca(a,id);
+			if(no)imprimeFigura(no);
+			else printf("nó com elemento %d não encontrado!",id);
 			printf("\n");
 		}
 		else if (choice == 'r'){
