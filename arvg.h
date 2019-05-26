@@ -11,9 +11,9 @@ typedef struct arvg
 	struct arvg *prim_filho, *prox_irmao;
 } TAG;
 extern TAG *cria(void);
-extern TAG *busca(TAG *a, int idPai);
+extern TAG *busca(TAG *a, int id);
 extern TAG *insere(TAG *a, int id, int idPai, char *nome, float dim1, float dim2, float dim3);
-extern void imprime(TAG *a);
+extern void imprime(TAG *a, int altura);
 extern void imprimeFigura(TAG *a);
 extern TAG *ler_de_arquivo(char *nome1, TAG *a);
 extern TAG *retira(TAG *a, int id);

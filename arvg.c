@@ -138,20 +138,32 @@ void imprimeFigura(TAG *a)
 	}
 }
 
-void imprime(TAG *a)
-{ //Aqui só imprimimos o principal da figura.
+void imprime(TAG *a, int altura)
+{
 	if (a)
 	{
+		for (size_t i = 0; i < altura; i++)
+		{
+			printf("\t");
+		}
 		printf("{ cód:%d, figura:%s }\n", a->id, a->nomeFigura);
 		if (a->prim_filho)
-			imprime(a->prim_filho);
+			imprime(a->prim_filho, altura + 1);
 		if (a->prox_irmao)
-			imprime(a->prox_irmao);
+			imprime(a->prox_irmao, altura);
+	}
+}
+void atualizaPai(TAG *a, int novoPai)
+{
+	while (a)
+	{
+		a->idPai = novoPai;
+		a = a->prox_irmao;
 	}
 }
 
 TAG *retira(TAG *a, int id)
-{ //testei nao
+{
 	if (!a)
 		return a;
 	TAG *ret = busca(a, id);
@@ -160,31 +172,109 @@ TAG *retira(TAG *a, int id)
 		printf("Elemento com código %d não encontrado!", id);
 		return a;
 	}
+	TAG *temp, *tempIrmao;
+	if (ret->idPai == 0)
+	{
+		tempIrmao = ret->prim_filho;
+		if (!tempIrmao)
+			return NULL;
+		atualizaPai(tempIrmao, tempIrmao->id);
+		tempIrmao->idPai = 0;
+		if (tempIrmao->prim_filho)
+		{
+			temp = tempIrmao->prim_filho->prox_irmao;
+			if (temp)
+			{
+				while (temp->prox_irmao)
+					temp = temp->prox_irmao;
+				temp->prox_irmao = tempIrmao->prox_irmao;
+			}
+			else
+				tempIrmao->prim_filho->prox_irmao = tempIrmao->prox_irmao;
+		}
+		else
+			tempIrmao->prim_filho = tempIrmao->prox_irmao;
+		tempIrmao->prox_irmao = NULL;
+		free(ret);
+		return (tempIrmao);
+	}
 	TAG *pai = busca(a, ret->idPai);
-	if (pai->prim_filho == ret)
+	atualizaPai(ret->prim_filho, pai->id);
+	if (pai->prim_filho->id == ret->id)
 	{
-		//TAG *p = ret;
-		pai->prim_filho = ret->prim_filho;
-		TAG *p = pai->prim_filho;
-		while (p->prox_irmao)
-			p = p->prox_irmao;
-		p->prox_irmao = ret->prox_irmao;
-		free(ret);
+		if (ret->prim_filho)
+		{
+			pai->prim_filho = ret->prim_filho;
+			temp = ret->prim_filho->prox_irmao;
+			if (temp)
+			{
+				while (temp->prox_irmao)
+					temp = temp->prox_irmao;
+				temp->prox_irmao = ret->prox_irmao;
+			}
+			else
+				ret->prim_filho->prox_irmao = ret->prox_irmao;
+		}
+		else
+		{
+			pai->prim_filho = ret->prox_irmao;
+		}
 	}
-	TAG *p = pai->prim_filho;
-	while (p->prox_irmao != ret)
-		p = p->prox_irmao;
-	if (!eFolha(ret))
+	else
 	{
-		TAG *q = p->prox_irmao;
-		p->prox_irmao = ret->prim_filho;
-		TAG *aux = ret->prim_filho;
-		while (aux->prox_irmao)
-			aux = aux->prox_irmao;
-		aux->prox_irmao = q;
-		free(ret);
+		temp = pai->prim_filho;
+		while (temp->prox_irmao->id != ret->id)
+			temp = temp->prox_irmao;
+		if (ret->prim_filho)
+		{
+			temp->prox_irmao = ret->prim_filho;
+			if (ret->prox_irmao)
+			{
+				temp = ret->prim_filho->prox_irmao;
+				if (temp)
+				{
+					while (temp->prox_irmao)
+						temp = temp->prox_irmao;
+					temp->prox_irmao = ret->prox_irmao;
+				}
+				else
+					ret->prim_filho->prox_irmao = ret->prox_irmao;
+			}
+		}
+		else
+		{
+			temp->prox_irmao = temp->prox_irmao->prox_irmao;
+		}
 	}
-	return a;
+	free(ret);
+	return (a);
+	// }
+	// TAG *pai = busca(a, ret->idPai);
+	// if (pai->prim_filho == ret)
+	// {
+	// 	//TAG *p = ret;
+	// 	pai->prim_filho = ret->prim_filho;
+	// 	TAG *p = pai->prim_filho;
+	// 	while (p->prox_irmao)
+	// 		p = p->prox_irmao;
+	// 	p->prox_irmao = ret->prox_irmao;
+	// 	free(ret);
+	// 	// return a;
+	// }
+	// TAG *p = pai->prim_filho;
+	// while (p->prox_irmao != ret)
+	// 	p = p->prox_irmao;
+	// if (!eFolha(ret))
+	// {
+	// 	TAG *q = p->prox_irmao;
+	// 	p->prox_irmao = ret->prim_filho;
+	// 	TAG *aux = ret->prim_filho;
+	// 	while (aux->prox_irmao)
+	// 		aux = aux->prox_irmao;
+	// 	aux->prox_irmao = q;
+	// 	free(ret);
+	// }
+	// return a;
 }
 
 char *init(char *string, int n)
@@ -313,6 +403,12 @@ TAG *ler_de_arquivo(char *nome1, TAG *a)
 			}
 			dim3 = atof(aux);
 			init(aux, tam);
+		}
+		else
+		{
+			printf("Figura geométrica não reconhecida: %s\n", nome);
+			fclose(f);
+			return NULL;
 		}
 		if (strlen(linha) > 8)
 		{

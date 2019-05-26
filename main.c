@@ -31,7 +31,7 @@ int main()
 	{
 		float dim1 = 0, dim2 = 0, dim3 = 0;
 		printf("\n\n");
-		printf("\nDigite 'a' para inserir um objeto na árvore\nDigite 'p' para imprimir detalhes de um objeto na arvore\nDigite 'P' para imprimir os objetos da árvore\nDigite 'm' para modificar um objeto na árvore\nDigite 'c' para alterar a forma de impressão da árvore\nDigite 'r' para remover um objeto da árvore\nDigite 't' para transformar a árvore genérica gerada em uma árvore binária de busca \n");
+		printf("\nDigite 'a' para inserir um objeto na árvore\nDigite 'p' para imprimir detalhes de um objeto na arvore\nDigite 'P' para imprimir os objetos da árvore\nDigite 'm' para modificar as dimensões de um objeto\nDigite 'r' para remover um objeto da árvore\nDigite 't' para transformar a árvore genérica gerada em uma árvore binária de busca \n");
 		scanf(" %c", &choice);
 		if (choice == 's')
 			break;
@@ -39,52 +39,62 @@ int main()
 		{
 			printf("Insira o código único: ");
 			scanf("%d", &id);
-			printf("Insira o código do pai deste objeto na árvore: ");
-			scanf("%d", &idPai);
-			printf("Insira a forma geométrica: ");
-			scanf("%s", nome);
-			int erro = 0;
-			if (!strcmp(nome, "TRA"))
+			if (busca(a, id))
 			{
-				printf("Insira a base maior: \n");
-				scanf("%f", &dim1);
-				printf("Insira a base menor: \n ");
-				scanf("%f", &dim2);
-				printf("Insira a altura: \n");
-				scanf("%f", &dim3);
-			}
-			else if (!strcmp(nome, "TRI"))
-			{
-				printf("Insira a base: \n ");
-				scanf("%f", &dim1);
-				printf("Insira a altura: \n");
-				scanf("%f", &dim2);
-			}
-			else if (!strcmp(nome, "RET"))
-			{
-				printf("Insira a base: \n ");
-				scanf("%f", &dim1);
-				printf("Insira a altura: \n");
-				scanf("%f", &dim2);
-			}
-			else if (!strcmp(nome, "CIR"))
-			{
-				printf("Insira o raio: \n ");
-				scanf("%f", &dim1);
-			}
-			else if (!strcmp(nome, "QUA"))
-			{
-				printf("Insira o lado: \n ");
-				scanf("%f", &dim1);
+				printf("Id já existente.");
 			}
 			else
 			{
-				erro = 1;
-				printf("Forma geométrica inválida!");
+				printf("Insira o código do pai deste objeto na árvore: ");
+				scanf("%d", &idPai);
+				printf("Insira a forma geométrica: ");
+				scanf("%s", nome);
+				int erro = 0;
+				if (!strcmp(nome, "TRA"))
+				{
+					printf("Insira a base maior: \n");
+					scanf("%f", &dim1);
+					printf("Insira a base menor: \n ");
+					scanf("%f", &dim2);
+					printf("Insira a altura: \n");
+					scanf("%f", &dim3);
+				}
+				else if (!strcmp(nome, "TRI"))
+				{
+					printf("Insira a base: \n ");
+					scanf("%f", &dim1);
+					printf("Insira a altura: \n");
+					scanf("%f", &dim2);
+				}
+				else if (!strcmp(nome, "RET"))
+				{
+					printf("Insira a base: \n ");
+					scanf("%f", &dim1);
+					printf("Insira a altura: \n");
+					scanf("%f", &dim2);
+				}
+				else if (!strcmp(nome, "CIR"))
+				{
+					printf("Insira o raio: \n ");
+					scanf("%f", &dim1);
+				}
+				else if (!strcmp(nome, "QUA"))
+				{
+					printf("Insira o lado: \n ");
+					scanf("%f", &dim1);
+				}
+				else
+				{
+					erro = 1;
+					printf("Forma geométrica inválida!");
+				}
+				if (!erro)
+				{
+					a = insere(a, id, idPai, nome, dim1, dim2, dim3);
+					printf("Objeto inserido com sucesso!");
+				}
 			}
-			if (!erro)
-				a = insere(a, id, idPai, nome, dim1, dim2, dim3);
-		} //arquivo tá la embaixo
+		}
 		else if (choice == 'm')
 		{
 			printf("Digite o código único do objeto: ");
@@ -185,7 +195,7 @@ int main()
 		}
 		else if (choice == 'P')
 		{
-			imprime(a);
+			imprime(a, 0);
 		}
 		else if (choice == 'l')
 		{
@@ -198,5 +208,6 @@ int main()
 			//fazer a transformação de uma em outra, liberando a ag.
 		}
 	} while (1);
+	libera(a);
 	return 0;
 }
