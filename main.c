@@ -20,11 +20,18 @@ int main()
 	int id, idPai;
 	char choice;
 	FILE *fp;
+	while (!a)
+	{
+		printf("Digite o nome do arquivo de entrada:");
+		scanf("%s", arq);
+		a = ler_de_arquivo(arq, a);
+	}
+
 	do
 	{
 		float dim1 = 0, dim2 = 0, dim3 = 0;
 		printf("\n\n");
-		printf("\nDigite 'a' para inserir um objeto na árvore, digite 'p' para imprimir um detalhes de um objeto na arvore, digite 'f' para inserir um arquivo contendo objetos na arvore, digite 'P' para imprimir os objetos da árvore, digite 'm' para modificar um objeto na árvore, digite 'c' para alterar a forma de impressão da árvore, digite 'r' para remover um objeto da árvore, digite 't' para transformar a árvore genérica gerada em uma árvore binária de busca \n");
+		printf("\nDigite 'a' para inserir um objeto na árvore\nDigite 'p' para imprimir detalhes de um objeto na arvore\nDigite 'P' para imprimir os objetos da árvore\nDigite 'm' para modificar um objeto na árvore\nDigite 'c' para alterar a forma de impressão da árvore\nDigite 'r' para remover um objeto da árvore\nDigite 't' para transformar a árvore genérica gerada em uma árvore binária de busca \n");
 		scanf(" %c", &choice);
 		if (choice == 's')
 			break;
@@ -185,18 +192,11 @@ int main()
 			libera(a);
 			a = cria();
 		}
-		else if (choice == 'f')
-		{
-			printf("Digite o nome do arquivo de entrada:");
-			scanf("%s", arq);
-			a = ler_de_arquivo(arq, a);
-		}
 		else if (choice == 't')
 		{
 			printf("oi");
 			//fazer a transformação de uma em outra, liberando a ag.
 		}
 	} while (1);
-
 	return 0;
 }
