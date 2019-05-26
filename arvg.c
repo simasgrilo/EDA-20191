@@ -56,6 +56,23 @@ TAG *insere(TAG *a, int id, int idPai, char *nome, float dim1, float dim2, float
 		printf("Já existe um elemento na árvore com código %d! \n", id);
 		return a;
 	}
+	if (!idPai)
+	{
+		TAG *novo = cria();
+		strcpy(novo->nomeFigura, nome);
+		novo->id = id;
+		novo->idPai = idPai;
+		//abordagem mais preguiçosa: verificar se o dado foi efetivamente passado como parâmetro. caso contrario, cravar na função que chamar a insere como 0.
+		if (dim1)
+			novo->dim1 = dim1;
+		if (dim2)
+			novo->dim2 = dim2;
+		if (dim3)
+			novo->dim3 = dim3;
+		novo->prox_irmao = a->prox_irmao;
+		a->prox_irmao = novo;
+		return a;
+	}
 	//se não for o caso, buscar o pai do nó que será inserido
 	TAG *pai = busca(a, idPai);
 	if (pai)
@@ -187,65 +204,71 @@ TAG *ler_de_arquivo(char *nome1, TAG *a)
 		printf("Arquivo nao existente\n");
 		return a;
 	}
-	int tam = 32, i, j, resp = 1;
+	int i, j, resp = 1;
+	size_t tam = 32, lineSize;
 	float dim1 = 0, dim2 = 0, dim3 = 0;
-	char id, idPai;
 	char k, nome[3], *linha, aux[32];
+	int id, idPai;
 	//while(tam = getline(&linha, &tam, f) != -1){ //se usar isso deixar linha[32] = *linha
 	/*while(resp!=69){
 		resp = fscanf(f,"%[^/]%/%[^/]%/%s", &id,&idPai,linha);
 		printf("resp : %d ",resp);
 		printf("%c %c",id,idPai);*/
-	while (tam = getline(&linha, &tam, f) != -1)
+	while (lineSize = getline(&linha, &tam, f) != -1)
 	{
-		aux = init(aux, tam);
-		float dim1 = 0, dim2 = 0, dim3 = 0;
-		int id, idPai;
-		i = 0, j = 0;
-		//while(linha[i] != '\n'){
-		//id = linha[i++];
-		while (linha[i] != '/')
-			aux[i] = linha[i++];
-		printf("bugou %s", aux);
-		id = atoi(aux);
-		//printf("%c ola",id);
-		i++;
-		//free(aux);
+		printf("%s\n", linha);
 		init(aux, tam);
-		//aux = (char*)malloc(sizeof(char)*32);
+		float dim1 = 0, dim2 = 0, dim3 = 0;
+		id = 0, idPai = 0;
+		i = 0, j = 0;
 		while (linha[i] != '/')
-			aux[j++] = linha[i++];
+		{
+			aux[i] = linha[i];
+			i++;
+		}
+		id = atoi(aux);
+		i++;
+		init(aux, tam);
+		while (linha[i] != '/')
+		{
+			aux[j] = linha[i];
+			j++;
+			i++;
+		}
 		idPai = atoi(aux);
-		//printf("%c olb",idPai);
-		//free(aux);
 		init(aux, tam);
 		i++;
 		j = 0;
 		while (linha[i] != ' ')
-			nome[j++] = linha[i++];
-		//printf("%s ",nome);
+		{
+			nome[j] = linha[i];
+			j++;
+			i++;
+		}
 		j = 0;
 		if ((!strcmp(nome, "TRI")) || ((!strcmp(nome, "RET"))))
 		{
-			//aux = (char*)malloc(sizeof(char)*32);
 			while (linha[i] == ' ')
 				i++;
 			while (linha[i] != ' ')
-				aux[j] = linha[i++];
+			{
+				aux[j] = linha[i];
+				j++;
+				i++;
+			}
 			dim1 = atof(aux);
-			//free(aux);
-			//aux = (char*)malloc(sizeof(char)*32);
 			init(aux, tam);
 			j = 0;
 			while (linha[i] == ' ')
 				i++;
 			while (linha[i] != ' ')
-				aux[j] = linha[i++];
+			{
+				aux[j] = linha[i];
+				i++;
+				j++;
+			}
 			dim2 = atof(aux);
 			init(aux, tam);
-			//free(aux);
-			printf("%f ", dim1);
-			printf("%f ", dim2);
 		}
 		else if ((!strcmp(nome, "CIR")) || ((!strcmp(nome, "QUA"))))
 		{
@@ -269,7 +292,8 @@ TAG *ler_de_arquivo(char *nome1, TAG *a)
 			//printf("%f ", dim2);
 			//printf("%f ", dim3);
 		}
-		printf("\n");
+		printf("%d %d %s %f %f %f\n", id, idPai, nome, dim1, dim2, dim3);
+		a = insere(a, id, idPai, nome, dim1, dim2, dim3);
 		//}
 	}
 	fclose(f);
