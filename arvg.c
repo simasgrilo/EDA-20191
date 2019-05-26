@@ -198,25 +198,19 @@ char *init(char *string, int n)
 //faltam ajustes. faço na volta
 TAG *ler_de_arquivo(char *nome1, TAG *a)
 {
-	FILE *f = fopen(nome1, "rt");
+	FILE *f = fopen(nome1, "r");
 	if (!f)
 	{
 		printf("Arquivo nao existente\n");
 		return a;
 	}
 	int i, j, resp = 1;
-	size_t tam = 32, lineSize;
+	int tam = 32;
 	float dim1 = 0, dim2 = 0, dim3 = 0;
-	char k, nome[3], *linha, aux[32];
+	char k, nome[3], linha[124], aux[32];
 	int id, idPai;
-	//while(tam = getline(&linha, &tam, f) != -1){ //se usar isso deixar linha[32] = *linha
-	/*while(resp!=69){
-		resp = fscanf(f,"%[^/]%/%[^/]%/%s", &id,&idPai,linha);
-		printf("resp : %d ",resp);
-		printf("%c %c",id,idPai);*/
-	while (lineSize = getline(&linha, &tam, f) != -1)
+	while (fgets(linha, sizeof linha, f) != NULL)
 	{
-		printf("%s\n", linha);
 		init(aux, tam);
 		float dim1 = 0, dim2 = 0, dim3 = 0;
 		id = 0, idPai = 0;
@@ -261,7 +255,7 @@ TAG *ler_de_arquivo(char *nome1, TAG *a)
 			j = 0;
 			while (linha[i] == ' ')
 				i++;
-			while (linha[i] != ' ')
+			while (linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\0')
 			{
 				aux[j] = linha[i];
 				i++;
@@ -274,29 +268,57 @@ TAG *ler_de_arquivo(char *nome1, TAG *a)
 		{
 			while (linha[i] == ' ')
 				i++;
-			dim1 = linha[i];
-			//printf("%f ", dim1);
+			j = 0;
+			while (linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\0')
+			{
+				aux[j] = linha[i];
+				j++;
+				i++;
+			}
+			dim1 = atof(aux);
+			init(aux, tam);
 		}
 		else if (!strcmp(nome, "TRA"))
 		{
 			while (linha[i] == ' ')
 				i++;
-			dim1 = linha[i];
+			j = 0;
+			while (linha[i] != ' ')
+			{
+				aux[j] = linha[i];
+				j++;
+				i++;
+			}
+			dim1 = atof(aux);
+			init(aux, tam);
+			j = 0;
 			while (linha[i] == ' ')
 				i++;
-			dim2 = linha[i];
+			while (linha[i] != ' ')
+			{
+				aux[j] = linha[i];
+				j++;
+				i++;
+			}
+			dim2 = atof(aux);
+			init(aux, tam);
+			j = 0;
 			while (linha[i] == ' ')
 				i++;
-			dim3 = linha[i];
-			//printf("%f ", dim1);
-			//printf("%f ", dim2);
-			//printf("%f ", dim3);
+			while (linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\0')
+			{
+				aux[j] = linha[i];
+				i++;
+				j++;
+			}
+			dim3 = atof(aux);
+			init(aux, tam);
 		}
-		printf("%d %d %s %f %f %f\n", id, idPai, nome, dim1, dim2, dim3);
-		a = insere(a, id, idPai, nome, dim1, dim2, dim3);
-		//}
+		if (strlen(linha) > 8)
+		{
+			a = insere(a, id, idPai, nome, dim1, dim2, dim3);
+		}
 	}
-	fclose(f);
 	printf("Arquivo lido com sucesso!\n");
-	return NULL;
+	return a;
 }
