@@ -319,6 +319,7 @@ TAG *ler_de_arquivo(char *nome1, TAG *a)
 			a = insere(a, id, idPai, nome, dim1, dim2, dim3);
 		}
 	}
+	fclose(f);
 	printf("Arquivo lido com sucesso!\n");
 	return a;
 }
