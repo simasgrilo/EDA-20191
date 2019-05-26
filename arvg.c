@@ -16,14 +16,13 @@ TAG* cria (void){
 TAG *busca (TAG*a, int id){
 	if(!a) return NULL;
 	if(a -> id == id) return a;
-	if(!a -> prim_filho || !a -> prox_irmao) return NULL;
-	TAG * resp = NULL;
+	if(!a -> prim_filho && !a -> prox_irmao) return NULL;
 	if(a -> prim_filho){
-		resp = busca(a -> prim_filho,id);
+		TAG* resp = busca(a -> prim_filho,id);
 		if(resp) return resp;
-		else resp = busca(a -> prox_irmao,id);
 	}
-	return resp;
+	if(a -> prox_irmao) return busca(a-> prox_irmao,id);
+	else return NULL;
 
 }
 
@@ -86,11 +85,11 @@ int eFolha(TAG *a){
 }
 void imprimeFigura(TAG *a){
 	if(a){
-		if(strcmp(a-> nomeFigura,"TRI")) printf("{ cód:%d \n figura:%s \n base:%f \n altura:%f \n área: %f \n }",a->id,a->nomeFigura,a->dim1,a->dim2,((a->dim1 * a->dim2)/2));
-		if(strcmp(a-> nomeFigura,"RET")) printf("{ cód:%d \n figura:%s \n base:%f \n altura:%f \n área: %f \n}",a->id,a->nomeFigura,a->dim1,a->dim2,(a->dim1 * a->dim2));
-		if(strcmp(a-> nomeFigura,"TRA")) printf("{ cód:%d \n figura:%s \n base menor:%f \n base maior: %f \n altura:%f \n área: }",a->id,a->nomeFigura,a->dim1,a->dim2,(((a->dim1 + a->dim2)*a->dim3)/2));
-		if(strcmp(a-> nomeFigura,"CIR")) printf("{ cód:%d \n figura:%s \n raio:%f \n área: %f \n}",a->id,a->nomeFigura,a->dim1,(M_PI * (pow(a->dim1,2))));
-		if(strcmp(a-> nomeFigura,"QUA")) printf("{ cód:%d \n figura:%s \n lado:%f \n área: %f \n}",a->id,a->nomeFigura,a->dim1,(pow(a->dim1, 2)));
+		if(!strcmp(a-> nomeFigura,"TRI")) printf("{ cód:%d \n figura:%s \n base:%f \n altura:%f \n área: %f \n }",a->id,a->nomeFigura,a->dim1,a->dim2,((a->dim1 * a->dim2)/2));
+		if(!strcmp(a-> nomeFigura,"RET")) printf("{ cód:%d \n figura:%s \n base:%f \n altura:%f \n área: %f \n}",a->id,a->nomeFigura,a->dim1,a->dim2,(a->dim1 * a->dim2));
+		if(!strcmp(a-> nomeFigura,"TRA")) printf("{ cód:%d \n figura:%s \n base menor:%f \n base maior: %f \n altura:%f \n área: }",a->id,a->nomeFigura,a->dim1,a->dim2,(((a->dim1 + a->dim2)*a->dim3)/2));
+		if(!strcmp(a-> nomeFigura,"CIR")) printf("{ cód:%d \n figura:%s \n raio:%f \n área: %f \n}",a->id,a->nomeFigura,a->dim1,(M_PI * (pow(a->dim1,2))));
+		if(!strcmp(a-> nomeFigura,"QUA")) printf("{ cód:%d \n figura:%s \n lado:%f \n área: %f \n}",a->id,a->nomeFigura,a->dim1,(pow(a->dim1, 2)));
 	}
 }
 
@@ -131,6 +130,14 @@ TAG *retira(TAG *a, int id){//testei nao
 	}
 	return a;
 }
+
+char* init(char* string, int n){
+	int i = 0;
+	for(i; i < n; i++) string[i] = '\0';
+	return string;
+
+}
+
 //faltam ajustes. faço na volta
 TAG* ler_de_arquivo(char *nome1, TAG *a){
 	FILE *f = fopen(nome1, "rt");
@@ -138,33 +145,61 @@ TAG* ler_de_arquivo(char *nome1, TAG *a){
 		printf("Arquivo nao existente\n");
 		return a;
 	}
-	int id=-1, idPai, tam = 32,i,j;
-	float dim1, dim2, dim3;
-	char k,nome[3], *linha;
+	int tam = 32,i,j,resp = 1 ;
+	float dim1 = 0, dim2 = 0, dim3 = 0;
+	char id, idPai;
+	char k,nome[3], *linha, aux[32];
+	//while(tam = getline(&linha, &tam, f) != -1){ //se usar isso deixar linha[32] = *linha
+	/*while(resp!=69){
+		resp = fscanf(f,"%[^/]%/%[^/]%/%s", &id,&idPai,linha);
+		printf("resp : %d ",resp);
+		printf("%c %c",id,idPai);*/
 	while(tam = getline(&linha, &tam, f) != -1){
+		aux = init(aux,tam);
+		float dim1 = 0, dim2 = 0, dim3 = 0;
+		int id, idPai;
 		i = 0, j =0;
 		//while(linha[i] != '\n'){
-		//a leitura tá bem esquisita, acho que tem a ver com o tipo de linha que o getline traz
-	    id = linha[i++];
-		printf("%d",id);
+	    //id = linha[i++];
+		while(linha[i] != '/') aux[i] = linha[i++];
+		printf("bugou %s",aux);
+		id = atoi(aux);
+		//printf("%c ola",id);
 		i++;
-		idPai = linha[i++];
-		printf("%d ",idPai);
+		//free(aux);
+		init(aux,tam);
+		//aux = (char*)malloc(sizeof(char)*32);
+		while(linha[i] != '/') aux[j++] = linha[i++];
+		idPai = atoi(aux);
+		//printf("%c olb",idPai);
+		//free(aux);
+		init(aux,tam);
 		i++;
+		j=0;
 		while(linha[i] != ' ') nome[j++] = linha[i++];
-		printf("%s ",nome);
+		//printf("%s ",nome);
+		j=0;
 		if((!strcmp(nome,"TRI")) || ((!strcmp(nome,"RET")))){
+			//aux = (char*)malloc(sizeof(char)*32);
 			while(linha[i] == ' ') i++;
-			dim1 = linha[i];
+			while(linha[i]!= ' ') aux[j] = linha[i++];
+			dim1 = atof(aux);
+			//free(aux);
+			//aux = (char*)malloc(sizeof(char)*32);
+			init(aux,tam);
+			j=0;
 			while(linha[i] == ' ') i++;
-			dim2 = linha[i];
+			while(linha[i]!= ' ') aux[j] = linha[i++];
+			dim2 = atof(aux);
+			init(aux,tam);
+			//free(aux);
 			printf("%f ", dim1);
 			printf("%f ", dim2);
 		}
 		else if ((!strcmp(nome,"CIR")) || ((!strcmp(nome,"QUA")))){
 			while(linha[i] == ' ') i++;
 			dim1 = linha[i];
-			printf("%f ", dim1);
+			//printf("%f ", dim1);
 		}
 		else if (!strcmp(nome,"TRA")){
 			while(linha[i] == ' ') i++;
@@ -173,13 +208,13 @@ TAG* ler_de_arquivo(char *nome1, TAG *a){
 			dim2 = linha[i];
 			while(linha[i] == ' ') i++;
 			dim3 = linha[i];
-			printf("%f ", dim1);
-			printf("%f ", dim2);
-			printf("%f ", dim3);
-			printf("\n");
+			//printf("%f ", dim1);
+			//printf("%f ", dim2);
+			//printf("%f ", dim3);
+			
 		}
+		printf("\n");
 		//}
-		printf("%s",linha);// se apagar essa linha da segfault. se printar \n também. investigo mais tarde.
 	}
 	fclose(f);
 	printf("Arquivo lido com sucesso!\n");
