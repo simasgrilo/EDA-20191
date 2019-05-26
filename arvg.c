@@ -235,10 +235,12 @@ TAG *ler_de_arquivo(char *nome1, TAG *a)
 		j = 0;
 		while (linha[i] != ' ')
 		{
-			nome[j] = linha[i];
+			aux[j] = linha[i];
 			j++;
 			i++;
 		}
+		strcpy(nome,aux);
+		init(aux,tam);
 		j = 0;
 		if ((!strcmp(nome, "TRI")) || ((!strcmp(nome, "RET"))))
 		{
