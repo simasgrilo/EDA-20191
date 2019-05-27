@@ -4,6 +4,7 @@
 #include <math.h>
 
 #include "arvg.h"
+#include"abb.h"
 
 TAG *cria(void)
 {
@@ -421,3 +422,88 @@ TAG *ler_de_arquivo(char *nome1, TAG *a)
 	printf("Arquivo lido com sucesso!\n");
 	return a;
 }
+
+//ideia: transformo da arvore pro vetor, ordeno e do vetor p arvore, a arvore resultante fica mais balanceada assim
+
+int conta(TAG*a){
+	if(!a)
+		return 0;
+	else
+	{
+		int resp = 1;
+		if (a->prim_filho)
+			resp += conta(a->prim_filho);
+		if (a->prox_irmao)
+			resp += conta(a->prox_irmao);
+		return resp;
+	}
+}
+
+void addVetor(TAG *a, TAG**vetor, int i){
+	if(!a || !vetor)return;
+	//int i = 0;
+	/*TAG * no = cria();//vetor[i] = apreciso dar malloc e adicionar todo mundo (copiar) ou p fins intermediarios isso serve? se der free na arvore ou no vetor antes de add na arvore final da ruim
+				  	  //vai ter que copiar. esquece, eu tava acessando a posição i+1
+	no -> id = a -> id;
+	if(a -> dim1) no -> dim1 = a -> dim1;
+	if(a -> dim2) no -> dim2 = a -> dim2;
+	if(a -> dim3) no -> dim3 = a -> dim3;
+	strcpy(no -> nomeFigura,a-> nomeFigura);
+	vetor[i] = no;*/
+	while(vetor[i]) i++;
+	vetor[i] = a;	
+	if(a->prim_filho)
+		addVetor(a -> prim_filho,vetor,i);
+	if(a -> prox_irmao)
+		addVetor(a -> prox_irmao,vetor,i);
+
+}
+
+void ordena(TAG **vet, int n){
+	if(!vet) return;
+	int i = 0;
+	for(i; i < n; i++){
+		int j, menor = i;		
+		for(j = i + 1; j < n; j++){
+			if(vet[j] -> id < vet[menor] -> id) menor = j; 
+		}
+		if(menor != i){
+			TAG *temp = vet[menor];
+			vet[menor] = vet[i];
+			vet[i] = temp;
+		}
+	}
+}
+
+TABB * v2a (TAG **vet, int n){
+	if(!vet) return NULL;
+	if(n > 0){
+		TAG * raiz = vet[n/2];
+		int i = 0;
+		TABB * resp = NULL;
+		resp = insereABB(resp,raiz -> id, raiz -> nomeFigura, raiz -> dim1, raiz -> dim2,raiz -> dim3);
+		resp -> esq = v2a(vet, (n/2));
+		resp -> dir = v2a(&vet[(n/2)+1], n - (n/2 +1));
+		return resp;
+	}
+	return NULL;
+}
+
+TABB * g2b (TAG *a, TABB *b){
+	if(!a)
+		return NULL;
+	//versão 1: nao retiro da árvore original.
+	int qteElem = conta(a);
+	if(!b)
+		b = criaABB();
+	TAG ** vetArvore = (TAG**)malloc(sizeof(TAG*) * qteElem);
+	int i = 0;
+	for(i; i < qteElem; i++){
+		vetArvore[i] = NULL;
+	}
+	addVetor(a,vetArvore,0);
+	ordena(vetArvore,qteElem);
+	return v2a(vetArvore,qteElem);
+}
+
+

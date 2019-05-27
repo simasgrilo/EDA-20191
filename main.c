@@ -1,5 +1,6 @@
 
 #include "arvg.h"
+#include "abb.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -17,6 +18,7 @@ int main()
 
 	imprime(no); */
 	TAG *a = NULL, *obj = NULL;
+	TABB *b = NULL;
 	int id, idPai;
 	char choice;
 	FILE *fp;
@@ -31,7 +33,7 @@ int main()
 	{
 		float dim1 = 0, dim2 = 0, dim3 = 0;
 		printf("\n\n");
-		printf("\nDigite 'a' para inserir um objeto na árvore\nDigite 'p' para imprimir detalhes de um objeto na arvore\nDigite 'P' para imprimir os objetos da árvore\nDigite 'm' para modificar as dimensões de um objeto\nDigite 'r' para remover um objeto da árvore\nDigite 't' para transformar a árvore genérica gerada em uma árvore binária de busca \n");
+		printf("\nDigite 'a' para inserir um objeto na árvore\nDigite 'p' para imprimir detalhes de um objeto na arvore\nDigite 'P' para imprimir os objetos da árvore\nDigite 'm' para modificar as dimensões de um objeto\nDigite 'r' para remover um objeto da árvore\nDigite 't' para transformar a árvore genérica gerada em uma árvore binária de busca \n Digite 'b' para imprimir a árvore binária de busca gerada a partir da árvore genérica\n");
 		scanf(" %c", &choice);
 		if (choice == 's')
 			break;
@@ -205,7 +207,16 @@ int main()
 		else if (choice == 't')
 		{
 			printf("oi");
+			b = criaABB();
+			b = g2b(a,b);
 			//fazer a transformação de uma em outra, liberando a ag.
+		}
+		else if (choice == 'b')
+		{
+			if(b)
+				imprimeABB(b);
+			else
+				printf("Árvore de busca binária correspondente vazia!");
 		}
 	} while (1);
 	libera(a);

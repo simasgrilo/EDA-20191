@@ -2,6 +2,7 @@
 #define ARVG_HEADER_GUARD
 #include <stdlib.h>
 #include <math.h>
+#include"abb.h"
 
 typedef struct arvg
 {
@@ -18,6 +19,8 @@ extern void imprimeFigura(TAG *a);
 extern TAG *ler_de_arquivo(char *nome1, TAG *a);
 extern TAG *retira(TAG *a, int id);
 extern void libera(TAG *a);
+//extern int conta(TAG*a);
+extern TABB * g2b (TAG *a, TABB *b);
 /*TAK *modificaNome(TAG *a, char *nome);a
 TAK *modificaUmaDim(TAG *a, float dim1);
 TAK *modificaDuasDim(TAG *a, float dim1,float dim2);

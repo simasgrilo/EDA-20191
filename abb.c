@@ -40,6 +40,17 @@ TABB *insereABB(TABB *a, int id, char *nome, float dim1, float dim2, float dim3)
 	if (a->id > id)
 		a->esq = insereABB(a->esq, id, nome, dim1, dim2, dim3);
 	else if (a->id < id)
-		insereABB(a->dir, id, nome, dim1, dim2, dim3);
+		a -> dir = insereABB(a->dir, id, nome, dim1, dim2, dim3);
 	return a;
+}
+
+void imprimeABB(TABB *a){
+	if (a)//fica a vontade p melhorar isso
+	{
+		printf("{ cód:%d, figura:%s }\n", a->id, a->nomeFigura);
+		if (a->esq)
+			imprimeABB(a->esq);
+		if (a->dir)
+			imprimeABB(a->dir);
+	}
 }

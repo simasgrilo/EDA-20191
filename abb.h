@@ -1,4 +1,3 @@
-
 #ifndef ABB_HEADER_GUARD
 #define ABB_HEADER_GUARD
 #include <stdlib.h>
