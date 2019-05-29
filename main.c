@@ -246,6 +246,6 @@ int main()
 
 		}
 	} while (1);
-	libera(a);
+	//libera(a);
 	return 0;
 }
