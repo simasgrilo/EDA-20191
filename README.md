@@ -6,3 +6,4 @@ Forma de compilar: makefile (executado gerado com nome main).
 Dúvidas:
 Forçado a por entrada?
 Raíz não tem irmão?
+Impressão com detalhes para abb e árvore B?
