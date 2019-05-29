@@ -54,3 +54,12 @@ void imprimeABB(TABB *a){
 			imprimeABB(a->dir);
 	}
 }
+
+void liberaABB(TABB *a){
+	if(a){
+		if(a -> esq) liberaABB(a -> esq);
+		if(a -> dir) liberaABB(a -> dir);
+		free(a);
+	}
+
+}

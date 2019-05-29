@@ -1,11 +1,12 @@
 
 #include "arvg.h"
 #include "abb.h"
+#include "ab.h"
 
 #include <stdio.h>
 #include <string.h>
 
-//amanhã faço o input p arquivo e p coisa simples. To com preguiça de testar agoraa.
+
 int main()
 {
 	char nome[3] = "TRA", arq[31];
@@ -19,6 +20,7 @@ int main()
 	imprime(no); */
 	TAG *a = NULL, *obj = NULL;
 	TABB *b = NULL;
+	TAB * c = NULL;
 	int id, idPai;
 	char choice;
 	FILE *fp;
@@ -33,10 +35,14 @@ int main()
 	{
 		float dim1 = 0, dim2 = 0, dim3 = 0;
 		printf("\n\n");
-		printf("\nDigite 'a' para inserir um objeto na árvore\nDigite 'p' para imprimir detalhes de um objeto na arvore\nDigite 'P' para imprimir os objetos da árvore\nDigite 'm' para modificar as dimensões de um objeto\nDigite 'r' para remover um objeto da árvore\nDigite 't' para transformar a árvore genérica gerada em uma árvore binária de busca \n Digite 'b' para imprimir a árvore binária de busca gerada a partir da árvore genérica\n");
+		printf("\nDigite 'a' para inserir um objeto na árvore\nDigite 'p' para imprimir detalhes de um objeto na arvore\nDigite 'P' para imprimir os objetos da árvore\nDigite 'm' para modificar as dimensões de um objeto\nDigite 'r' para remover um objeto da árvore\nDigite 't' para transformar a árvore genérica gerada em uma árvore binária de busca \nDigite 'b' para imprimir a árvore binária de busca gerada a partir da árvore genérica\nDigite 'B' para transformar a árvore genérica em uma árvore B\nDigite 'v' para imprimir a árvore B gerada a partir da árvore genérica.");
 		scanf(" %c", &choice);
-		if (choice == 's')
+		if (choice == 's'){
+			if(a) libera(a);
+			if(b) liberaABB(b);
+			if(c) liberaAB(c);
 			break;
+		}
 		else if (choice == 'a')
 		{
 			printf("Insira o código único: ");
@@ -206,10 +212,12 @@ int main()
 		}
 		else if (choice == 't')
 		{
-			printf("oi");
-			b = criaABB();
-			b = g2b(a,b);
-			//fazer a transformação de uma em outra, liberando a ag.
+			if(a){
+				b = criaABB();
+				b = g2b(a,b);
+			}
+			else printf("Árvore genérica vazia!");
+			//fazer a transformação de uma em outra, liberando a ag?.
 		}
 		else if (choice == 'b')
 		{
@@ -217,6 +225,25 @@ int main()
 				imprimeABB(b);
 			else
 				printf("Árvore de busca binária correspondente vazia!");
+		}
+		else if (choice == 'B'){
+			printf("Insira o fator de ramificação t da Árvore B:\n");
+			int t;
+			scanf("%d",&t);
+			if(a){
+				int qte = conta(a);
+				TFig ** vet = (TFig**)malloc(sizeof(TFig*)*qte);
+				c = criaAB(t);
+				c = g2AB(a,vet,c,t);
+				liberaVetFig(vet,qte);
+			}
+			else printf("Árvore genérica vazia!");
+
+		}
+		else if (choice == 'v'){
+			if(c) imprimeAB(c,0);
+			else printf("Árvore B vazia!");
+
 		}
 	} while (1);
 	libera(a);
