@@ -4,7 +4,7 @@
 #include <math.h>
 
 #include "arvg.h"
-#include"abb.h"
+#include "abb.h"
 
 TAG *cria(void)
 {
@@ -145,7 +145,7 @@ void imprime(TAG *a, int altura)
 	{
 		for (size_t i = 0; i < altura; i++)
 		{
-			printf("\t");
+			printf("   ");
 		}
 		printf("{ cód:%d, figura:%s }\n", a->id, a->nomeFigura);
 		if (a->prim_filho)
@@ -163,7 +163,7 @@ void atualizaPai(TAG *a, int novoPai)
 	}
 }
 
-TAG *retira(TAG *a, int id)
+TAG *retira(TAG *a, int id, int idPai)
 {
 	if (!a)
 		return a;
@@ -173,109 +173,58 @@ TAG *retira(TAG *a, int id)
 		printf("Elemento com código %d não encontrado!", id);
 		return a;
 	}
-	TAG *temp, *tempIrmao;
 	if (ret->idPai == 0)
 	{
-		tempIrmao = ret->prim_filho;
-		if (!tempIrmao)
-			return NULL;
-		atualizaPai(tempIrmao, tempIrmao->id);
-		tempIrmao->idPai = 0;
-		if (tempIrmao->prim_filho)
-		{
-			temp = tempIrmao->prim_filho->prox_irmao;
-			if (temp)
-			{
-				while (temp->prox_irmao)
-					temp = temp->prox_irmao;
-				temp->prox_irmao = tempIrmao->prox_irmao;
-			}
-			else
-				tempIrmao->prim_filho->prox_irmao = tempIrmao->prox_irmao;
-		}
-		else
-			tempIrmao->prim_filho = tempIrmao->prox_irmao;
-		tempIrmao->prox_irmao = NULL;
-		free(ret);
-		return (tempIrmao);
+		printf("Elemento com código %d é raiz!", id);
+		return a;
 	}
 	TAG *pai = busca(a, ret->idPai);
-	atualizaPai(ret->prim_filho, pai->id);
-	if (pai->prim_filho->id == ret->id)
+	TAG *temp;
+	TAG *novoPai = busca(a, idPai);
+	if (ret->prim_filho)
 	{
-		if (ret->prim_filho)
+		if (!novoPai)
 		{
-			pai->prim_filho = ret->prim_filho;
-			temp = ret->prim_filho->prox_irmao;
-			if (temp)
-			{
-				while (temp->prox_irmao)
-					temp = temp->prox_irmao;
-				temp->prox_irmao = ret->prox_irmao;
-			}
-			else
-				ret->prim_filho->prox_irmao = ret->prox_irmao;
+			printf("Novo pai com código %d não encontrado!", idPai);
+			return a;
 		}
 		else
 		{
-			pai->prim_filho = ret->prox_irmao;
+			if (busca(ret->prim_filho, idPai))
+			{
+				printf("Algum sucessor é o pai de código %d!", idPai);
+				return a;
+			}
 		}
+	}
+	atualizaPai(ret->prim_filho, idPai);
+	if (novoPai)
+	{
+		if (!novoPai->prim_filho)
+			novoPai->prim_filho = ret->prim_filho;
+		else
+		{
+			temp = novoPai->prim_filho;
+			while (temp->prox_irmao)
+				temp = temp->prox_irmao;
+			temp->prox_irmao = ret->prim_filho;
+		}
+	}
+	if (pai->prim_filho == ret)
+	{
+		pai->prim_filho = ret->prox_irmao;
+		free(ret);
+		return a;
 	}
 	else
 	{
 		temp = pai->prim_filho;
-		while (temp->prox_irmao->id != ret->id)
+		while (temp->prox_irmao != ret)
 			temp = temp->prox_irmao;
-		if (ret->prim_filho)
-		{
-			temp->prox_irmao = ret->prim_filho;
-			if (ret->prox_irmao)
-			{
-				temp = ret->prim_filho->prox_irmao;
-				if (temp)
-				{
-					while (temp->prox_irmao)
-						temp = temp->prox_irmao;
-					temp->prox_irmao = ret->prox_irmao;
-				}
-				else
-					ret->prim_filho->prox_irmao = ret->prox_irmao;
-			}
-		}
-		else
-		{
-			temp->prox_irmao = temp->prox_irmao->prox_irmao;
-		}
+		temp->prox_irmao = ret->prox_irmao;
+		free(ret);
+		return a;
 	}
-	free(ret);
-	return (a);
-	// }
-	// TAG *pai = busca(a, ret->idPai);
-	// if (pai->prim_filho == ret)
-	// {
-	// 	//TAG *p = ret;
-	// 	pai->prim_filho = ret->prim_filho;
-	// 	TAG *p = pai->prim_filho;
-	// 	while (p->prox_irmao)
-	// 		p = p->prox_irmao;
-	// 	p->prox_irmao = ret->prox_irmao;
-	// 	free(ret);
-	// 	// return a;
-	// }
-	// TAG *p = pai->prim_filho;
-	// while (p->prox_irmao != ret)
-	// 	p = p->prox_irmao;
-	// if (!eFolha(ret))
-	// {
-	// 	TAG *q = p->prox_irmao;
-	// 	p->prox_irmao = ret->prim_filho;
-	// 	TAG *aux = ret->prim_filho;
-	// 	while (aux->prox_irmao)
-	// 		aux = aux->prox_irmao;
-	// 	aux->prox_irmao = q;
-	// 	free(ret);
-	// }
-	// return a;
 }
 
 char *init(char *string, int n)
@@ -298,7 +247,7 @@ TAG *ler_de_arquivo(char *nome1, TAG *a)
 	int i, j, resp = 1;
 	int tam = 32;
 	float dim1 = 0, dim2 = 0, dim3 = 0;
-	char k, nome[3], linha[124], aux[32];
+	char k, nome[32], linha[124], aux[32];
 	int id, idPai;
 	while (fgets(linha, sizeof linha, f) != NULL)
 	{
@@ -330,8 +279,8 @@ TAG *ler_de_arquivo(char *nome1, TAG *a)
 			j++;
 			i++;
 		}
-		strcpy(nome,aux);
-		init(aux,tam);
+		strcpy(nome, aux);
+		init(aux, tam);
 		j = 0;
 		if ((!strcmp(nome, "TRI")) || ((!strcmp(nome, "RET"))))
 		{
@@ -425,8 +374,9 @@ TAG *ler_de_arquivo(char *nome1, TAG *a)
 
 //ideia: transformo da arvore pro vetor, ordeno e do vetor p arvore, a arvore resultante fica mais balanceada assim
 
-int conta(TAG*a){
-	if(!a)
+int conta(TAG *a)
+{
+	if (!a)
 		return 0;
 	else
 	{
@@ -439,8 +389,10 @@ int conta(TAG*a){
 	}
 }
 
-void addVetor(TAG *a, TAG**vetor, int i){
-	if(!a || !vetor)return;
+void addVetor(TAG *a, TAG **vetor, int i)
+{
+	if (!a || !vetor)
+		return;
 	//int i = 0;
 	/*TAG * no = cria();//vetor[i] = apreciso dar malloc e adicionar todo mundo (copiar) ou p fins intermediarios isso serve? se der free na arvore ou no vetor antes de add na arvore final da ruim
 				  	  //vai ter que copiar. esquece, eu tava acessando a posição i+1
@@ -450,24 +402,30 @@ void addVetor(TAG *a, TAG**vetor, int i){
 	if(a -> dim3) no -> dim3 = a -> dim3;
 	strcpy(no -> nomeFigura,a-> nomeFigura);
 	vetor[i] = no;*/
-	while(vetor[i]) i++;
-	vetor[i] = a;	
-	if(a->prim_filho)
-		addVetor(a -> prim_filho,vetor,i);
-	if(a -> prox_irmao)
-		addVetor(a -> prox_irmao,vetor,i);
-
+	while (vetor[i])
+		i++;
+	vetor[i] = a;
+	if (a->prim_filho)
+		addVetor(a->prim_filho, vetor, i);
+	if (a->prox_irmao)
+		addVetor(a->prox_irmao, vetor, i);
 }
 
-void ordena(TAG **vet, int n){
-	if(!vet) return;
+void ordena(TAG **vet, int n)
+{
+	if (!vet)
+		return;
 	int i = 0;
-	for(i; i < n; i++){
-		int j, menor = i;		
-		for(j = i + 1; j < n; j++){
-			if(vet[j] -> id < vet[menor] -> id) menor = j; 
+	for (i; i < n; i++)
+	{
+		int j, menor = i;
+		for (j = i + 1; j < n; j++)
+		{
+			if (vet[j]->id < vet[menor]->id)
+				menor = j;
 		}
-		if(menor != i){
+		if (menor != i)
+		{
 			TAG *temp = vet[menor];
 			vet[menor] = vet[i];
 			vet[i] = temp;
@@ -475,35 +433,38 @@ void ordena(TAG **vet, int n){
 	}
 }
 
-TABB * v2a (TAG **vet, int n){
-	if(!vet) return NULL;
-	if(n > 0){
-		TAG * raiz = vet[n/2];
+TABB *v2a(TAG **vet, int n)
+{
+	if (!vet)
+		return NULL;
+	if (n > 0)
+	{
+		TAG *raiz = vet[n / 2];
 		int i = 0;
-		TABB * resp = NULL;
-		resp = insereABB(resp,raiz -> id, raiz -> nomeFigura, raiz -> dim1, raiz -> dim2,raiz -> dim3);
-		resp -> esq = v2a(vet, (n/2));
-		resp -> dir = v2a(&vet[(n/2)+1], n - (n/2 +1));
+		TABB *resp = NULL;
+		resp = insereABB(resp, raiz->id, raiz->nomeFigura, raiz->dim1, raiz->dim2, raiz->dim3);
+		resp->esq = v2a(vet, (n / 2));
+		resp->dir = v2a(&vet[(n / 2) + 1], n - (n / 2 + 1));
 		return resp;
 	}
 	return NULL;
 }
 
-TABB * g2b (TAG *a, TABB *b){
-	if(!a)
+TABB *g2b(TAG *a, TABB *b)
+{
+	if (!a)
 		return NULL;
 	//versão 1: nao retiro da árvore original.
 	int qteElem = conta(a);
-	if(!b)
+	if (!b)
 		b = criaABB();
-	TAG ** vetArvore = (TAG**)malloc(sizeof(TAG*) * qteElem);
+	TAG **vetArvore = (TAG **)malloc(sizeof(TAG *) * qteElem);
 	int i = 0;
-	for(i; i < qteElem; i++){
+	for (i; i < qteElem; i++)
+	{
 		vetArvore[i] = NULL;
 	}
-	addVetor(a,vetArvore,0);
-	ordena(vetArvore,qteElem);
-	return v2a(vetArvore,qteElem);
+	addVetor(a, vetArvore, 0);
+	ordena(vetArvore, qteElem);
+	return v2a(vetArvore, qteElem);
 }
-
-
