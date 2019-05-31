@@ -11,18 +11,22 @@ TAB *criaAB(int t){
   novo->figs =(TFig**)malloc(sizeof(TFig*)*((t*2)-1));
   novo->folha=1;
   novo->filho = (TAB**)malloc(sizeof(TAB*)*t*2);
+  novo->t = t;
   int i;
   for(i=0; i<(t*2); i++) novo->filho[i] = NULL;
+  //for(i=0; i < t; i++) novo -> figs[i] = NULL; isso provoca segfault na inserção
   return novo;
 }
 
 
 TAB *liberaAB(TAB *a){
   if(a){
-    if(!a->folha){
-      int i;
+	int i;
+    if(!a->folha){     
       for(i = 0; i <= a->nchaves; i++) liberaAB(a->filho[i]);
-    }
+    }	
+	//for(i = 0; i < a -> nchaves; i++) if(a -> figs[i]) free(a -> figs[i]);
+	//liberaVetFig(a->figs,a->t);
     free(a->figs);
     free(a->filho);
     free(a);
@@ -85,7 +89,7 @@ TAB *divisao(TAB *x, int i, TAB* y, int t){
 TAB *insere_nao_completo(TAB *x, int id, char *nome, float dim1, float dim2, float dim3, int t){
   int i = x->nchaves-1;
   if(x->folha){
-    while((i>=0) && (id < x->figs[i] ->id)){
+    while((i>=0) && (x->figs[i]) && (id < x->figs[i] ->id)){
       x->figs[i+1] = x->figs[i] ;
       i--;
     }
@@ -99,11 +103,11 @@ TAB *insere_nao_completo(TAB *x, int id, char *nome, float dim1, float dim2, flo
     x->nchaves++;
     return x;
   }
-  while((i>=0) && (id <x->figs[i] -> id)) i--;
+  while((i>=0) && (x->figs[i]) && (id <x->figs[i] -> id)) i--;
   i++;
   if(x->filho[i]->nchaves == ((2*t)-1)){
     x = divisao(x, (i+1), x->filho[i], t);
-    if(id >x->figs[i] -> id) i++;
+    if(((x->figs[i])) && (id >x->figs[i] -> id)) i++;
   }
   x->filho[i] = insere_nao_completo(x->filho[i],id, nome, dim1, dim2, dim3, t);
   return x;

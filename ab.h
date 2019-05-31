@@ -7,7 +7,7 @@ typedef struct fig{
 }TFig;
 
 typedef struct ArvB{
-  int nchaves, folha; 
+  int nchaves, folha, t; 
   TFig **figs;
   struct ArvB **filho;
 }TAB;

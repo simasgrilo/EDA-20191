@@ -127,17 +127,18 @@ void imprimeFigura(TAG *a)
 	if (a)
 	{
 		if (!strcmp(a->nomeFigura, "TRI"))
-			printf("{ cód:%d \n figura:%s \n base:%f \n altura:%f \n área: %f \n }", a->id, a->nomeFigura, a->dim1, a->dim2, ((a->dim1 * a->dim2) / 2));
+			printf("{ cód:%d \n pai: %d\n figura:%s \n base:%f \n altura:%f \n área: %f \n }", a->id, a ->idPai, a->nomeFigura, a->dim1, a->dim2, ((a->dim1 * a->dim2) / 2));
 		if (!strcmp(a->nomeFigura, "RET"))
-			printf("{ cód:%d \n figura:%s \n base:%f \n altura:%f \n área: %f \n}", a->id, a->nomeFigura, a->dim1, a->dim2, (a->dim1 * a->dim2));
+			printf("{ cód:%d \n pai: %d\n figura:%s \n base:%f \n altura:%f \n área: %f \n}", a->id, a -> idPai, a->nomeFigura, a->dim1, a->dim2, (a->dim1 * a->dim2));
 		if (!strcmp(a->nomeFigura, "TRA"))
-			printf("{ cód:%d \n figura:%s \n base menor:%f \n base maior: %f \n altura:%f \n área: }", a->id, a->nomeFigura, a->dim1, a->dim2, (((a->dim1 + a->dim2) * a->dim3) / 2));
+			printf("{ cód:%d \n pai: %d\n figura:%s \n base menor:%f \n base maior: %f \n altura:%f \n área: %f\n}", a->id, a -> idPai,a->nomeFigura, a->dim1, a->dim2, a-> dim3, (((a->dim1 + a->dim2) * a->dim3) / 2));
 		if (!strcmp(a->nomeFigura, "CIR"))
-			printf("{ cód:%d \n figura:%s \n raio:%f \n área: %f \n}", a->id, a->nomeFigura, a->dim1, (M_PI * (pow(a->dim1, 2))));
+			printf("{ cód:%d \n pai: %d\n figura:%s \n raio:%f \n área: %f \n}", a->id,  a -> idPai, a->nomeFigura, a->dim1, (M_PI * (pow(a->dim1, 2))));
 		if (!strcmp(a->nomeFigura, "QUA"))
-			printf("{ cód:%d \n figura:%s \n lado:%f \n área: %f \n}", a->id, a->nomeFigura, a->dim1, (pow(a->dim1, 2)));
+			printf("{ cód:%d \n pai: %d\n figura:%s \n lado:%f \n área: %f \n}", a->id, a -> idPai, a->nomeFigura, a->dim1, (pow(a->dim1, 2)));
 	}
 }
+
 
 void imprime(TAG *a, int altura)
 {
@@ -393,15 +394,6 @@ void addVetor(TAG *a, TAG **vetor, int i)
 {
 	if (!a || !vetor)
 		return;
-	//int i = 0;
-	/*TAG * no = cria();//vetor[i] = apreciso dar malloc e adicionar todo mundo (copiar) ou p fins intermediarios isso serve? se der free na arvore ou no vetor antes de add na arvore final da ruim
-				  	  //vai ter que copiar. esquece, eu tava acessando a posição i+1
-	no -> id = a -> id;
-	if(a -> dim1) no -> dim1 = a -> dim1;
-	if(a -> dim2) no -> dim2 = a -> dim2;
-	if(a -> dim3) no -> dim3 = a -> dim3;
-	strcpy(no -> nomeFigura,a-> nomeFigura);
-	vetor[i] = no;*/
 	while (vetor[i])
 		i++;
 	vetor[i] = a;
@@ -468,3 +460,31 @@ TABB *g2b(TAG *a, TABB *b)
 	ordena(vetArvore, qteElem);
 	return v2a(vetArvore, qteElem);
 }
+
+TAG* modificaPai(TAG* a, TAG*no, int idPai){ //ou o retorno é void?
+	TAG *noPai = busca(a,idPai);
+	TAG *noPaiDoNo = busca(a, no -> idPai);
+	if(!a || (!noPai))
+	{
+		printf("Nó com código único %d não encontrado",idPai);
+		return a;
+	}
+	if(!idPai)
+	{	
+		printf("O nó selecionado é a raiz. Nenhuma modificação será aplicada");
+		return a;
+	}
+	TAG *p = noPaiDoNo -> prim_filho, *q = noPaiDoNo -> prim_filho, *aux = NULL;
+	while(q -> prox_irmao) q = q -> prox_irmao;
+	int id = no -> id;
+	char nome[3];
+	strcpy(nome, no -> nomeFigura);
+	float dim1 = no -> dim1, dim2 = no -> dim2, dim3 = no -> dim3;
+	//retiro ele e jogo os seus filhos p cima
+	a = retira(a, id, no -> idPai);
+	//e boto de novo
+	a = insere(a, id, idPai, nome, dim1,dim2,dim3);
+	return a;
+
+}
+

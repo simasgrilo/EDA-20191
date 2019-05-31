@@ -21,6 +21,7 @@ extern TAG *retira(TAG *a, int id, int idPai);
 extern void libera(TAG *a);
 extern int conta(TAG *a);
 extern TABB *g2b(TAG *a, TABB *b);
+extern TAG* modificaPai(TAG* a, TAG*no, int idPai);
 /*TAK *modificaNome(TAG *a, char *nome);a
 TAK *modificaUmaDim(TAG *a, float dim1);
 TAK *modificaDuasDim(TAG *a, float dim1,float dim2);

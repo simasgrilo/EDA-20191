@@ -21,7 +21,6 @@ int main()
 	TABB *b = NULL;
 	TAB *c = NULL;
 	int id, idPai;
-	char choice;
 	FILE *fp;
 	while (!a)
 	{
@@ -33,6 +32,7 @@ int main()
 	do
 	{
 		float dim1 = 0, dim2 = 0, dim3 = 0;
+		char choice;
 		printf("\n\n");
 		printf("\nDigite 'a' para inserir um objeto na árvore\nDigite 'p' para imprimir detalhes de um objeto na arvore\nDigite 'P' para imprimir os objetos da árvore\nDigite 'm' para modificar as dimensões de um objeto\nDigite 'r' para remover um objeto da árvore\nDigite 't' para transformar a árvore genérica gerada em uma árvore binária de busca \nDigite 'b' para imprimir a árvore binária de busca gerada a partir da árvore genérica\nDigite 'B' para transformar a árvore genérica em uma árvore B\nDigite 'v' para imprimir a árvore B gerada a partir da árvore genérica\nDigite 's' para sair\n");
 		scanf(" %c", &choice);
@@ -115,10 +115,12 @@ int main()
 				printf("objeto com código único %d não encontrado", id);
 			else
 			{
+				char choice = ' ';
 				imprimeFigura(obj);
 				if (!strcmp(obj->nomeFigura, "TRA"))
 				{
-					printf("\nO que deseja alterar:\na)base maior;\nb)base menor;\nc)Altura;");
+					//char choice;
+					printf("\nO que deseja alterar:\na)base maior;\nb)base menor;\nc)Altura;\nd)Nome;\ne)pai na árvore");
 					scanf(" %c", &choice);
 					if (choice == 'a')
 					{
@@ -138,11 +140,84 @@ int main()
 						scanf("%f", &dim3);
 						obj->dim3 = dim3;
 					}
+					else if (choice == 'd')
+					{
+						printf("Insira o novo nome: \n ");
+						scanf("%s", nome);
+						strcpy(obj->nomeFigura,nome);
+						if (!strcmp(nome, "TRA"))
+						{
+							printf("Insira a base maior: \n");
+							scanf("%f", &dim1);
+							printf("Insira a base menor: \n ");
+							scanf("%f", &dim2);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim3);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = dim3;
+						}
+						else if (!strcmp(nome, "TRI"))
+						{
+							printf("Insira a base: \n ");
+							scanf("%f", &dim1);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim2);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "RET"))
+						{
+							printf("Insira a base: \n ");
+							scanf("%f", &dim1);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim2);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "CIR"))
+						{
+							printf("Insira o raio: \n ");
+							scanf("%f", &dim1);
+							obj -> dim1 = dim1;
+							obj -> dim2 = 0;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "QUA"))
+						{
+							printf("Insira o lado: \n ");
+							scanf("%f", &dim1);
+							obj -> dim1 = dim1;
+							obj -> dim2 = 0;
+							obj -> dim3 = 0;
+						}
+					}
+					else if (choice == 'e')
+					{
+						printf("Insira o código único do novo pai na árvore: \n");
+						scanf("%d", &idPai);
+						a = modificaPai(a, obj, idPai);
+					}
 				}
 				else if (!strcmp(obj->nomeFigura, "TRI"))
 				{
-					printf("\nO que deseja alterar:\na)base;\nb)altura;");
+					//char choice;
+					printf("\nO que deseja alterar:\na)base;\nb)altura;\nc)Nome;\nd)pai na árvore");
 					scanf(" %c", &choice);
+					/*if (choice == 'a')
+					{
+						printf("Insira a nova base: \n");
+						scanf("%f", &dim1);
+						obj->dim1 = dim1;
+					}
+					else if (choice == 'b')
+					{
+						printf("Insira a nova altura: \n ");
+						scanf("%f", &dim2);
+						obj->dim2 = dim2;
+					}*/
 					if (choice == 'a')
 					{
 						printf("Insira a nova base: \n");
@@ -154,11 +229,72 @@ int main()
 						printf("Insira a nova altura: \n ");
 						scanf("%f", &dim2);
 						obj->dim2 = dim2;
+					}
+					else if (choice == 'c')
+					{
+						printf("Insira o novo nome: \n ");
+						scanf("%s", nome);
+						strcpy(obj->nomeFigura,nome);
+						if (!strcmp(nome, "TRA"))
+						{
+							printf("Insira a base maior: \n");
+							scanf("%f", &dim1);
+							printf("Insira a base menor: \n ");
+							scanf("%f", &dim2);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim3);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = dim3;
+						}
+						else if (!strcmp(nome, "TRI"))
+						{
+							printf("Insira a base: \n ");
+							scanf("%f", &dim1);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim2);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "RET"))
+						{
+							printf("Insira a base: \n ");
+							scanf("%f", &dim1);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim2);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "CIR"))
+						{
+							printf("Insira o raio: \n ");
+							scanf("%f", &dim1);
+							obj -> dim1 = dim1;
+							obj -> dim2 = 0;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "QUA"))
+						{
+							printf("Insira o lado: \n ");
+							scanf("%f", &dim1);
+							obj -> dim1 = dim1;
+							obj -> dim2 = 0;
+							obj -> dim3 = 0;
+						}
+					}
+					else if (choice == 'd')
+					{
+						printf("Insira o código único do novo pai na árvore: \n");
+						scanf("%d", &idPai);
+						a = modificaPai(a, obj, idPai);
 					}
 				}
 				else if (!strcmp(obj->nomeFigura, "RET"))
 				{
-					printf("\nO que deseja alterar:\na)base;\nb)altura;");
+					//char choice;
+					printf("\nO que deseja alterar:\na)base;\nb)altura;\nc)Nome;\nd)pai na árvore");
 					scanf(" %c", &choice);
 					if (choice == 'a')
 					{
@@ -172,18 +308,212 @@ int main()
 						scanf("%f", &dim2);
 						obj->dim2 = dim2;
 					}
+					else if (choice == 'c')
+					{
+						printf("Insira o novo nome: \n ");
+						scanf("%s", nome);
+						strcpy(obj->nomeFigura,nome);
+						if (!strcmp(nome, "TRA"))
+						{
+							printf("Insira a base maior: \n");
+							scanf("%f", &dim1);
+							printf("Insira a base menor: \n ");
+							scanf("%f", &dim2);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim3);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = dim3;
+						}
+						else if (!strcmp(nome, "TRI"))
+						{
+							printf("Insira a base: \n ");
+							scanf("%f", &dim1);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim2);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "RET"))
+						{
+							printf("Insira a base: \n ");
+							scanf("%f", &dim1);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim2);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "CIR"))
+						{
+							printf("Insira o raio: \n ");
+							scanf("%f", &dim1);
+							obj -> dim1 = dim1;
+							obj -> dim2 = 0;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "QUA"))
+						{
+							printf("Insira o lado: \n ");
+							scanf("%f", &dim1);
+							obj -> dim1 = dim1;
+							obj -> dim2 = 0;
+							obj -> dim3 = 0;
+						}
+					}
+					else if (choice == 'd')
+					{
+						printf("Insira o código único do novo pai na árvore: \n");
+						scanf("%d", &idPai);
+						a = modificaPai(a, obj, idPai);
+					}
 				}
-				else if (!strcmp(obj->nomeFigura, "cir"))
+				else if (!strcmp(obj->nomeFigura, "CIR"))
 				{
-					printf("Insira o novo raio: \n ");
-					scanf("%f", &dim1);
-					obj->dim1 = dim1;
+					//printf("Insira o novo raio: \n ");
+					printf("\nO que deseja alterar:\na)base\nb)Nome;\nc)pai na árvore");
+					//char choice;
+					scanf("%c", &choice);
+					if (choice == 'a')
+					{
+						printf("Insira a nova base maior: \n");
+						scanf("%f", &dim1);
+						obj->dim1 = dim1;
+					}
+					else if (choice == 'b')
+					{
+						printf("Insira o novo nome: \n ");
+						scanf("%s", nome);
+						strcpy(obj->nomeFigura,nome);
+						if (!strcmp(nome, "TRA"))
+						{
+							printf("Insira a base maior: \n");
+							scanf("%f", &dim1);
+							printf("Insira a base menor: \n ");
+							scanf("%f", &dim2);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim3);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = dim3;
+						}
+						else if (!strcmp(nome, "TRI"))
+						{
+							printf("Insira a base: \n ");
+							scanf("%f", &dim1);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim2);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "RET"))
+						{
+							printf("Insira a base: \n ");
+							scanf("%f", &dim1);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim2);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "CIR"))
+						{
+							printf("Insira o raio: \n ");
+							scanf("%f", &dim1);
+							obj -> dim1 = dim1;
+							obj -> dim2 = 0;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "QUA"))
+						{
+							printf("Insira o lado: \n ");
+							scanf("%f", &dim1);
+							obj -> dim1 = dim1;
+							obj -> dim2 = 0;
+							obj -> dim3 = 0;
+						}
+					}
+					else if (choice == 'c')
+					{
+						printf("Insira o código único do novo pai na árvore: \n");
+						scanf("%d", &idPai);
+						a = modificaPai(a, obj, idPai);
+					}
+					
 				}
 				else if (!strcmp(obj->nomeFigura, "QUA"))
 				{
-					printf("Insira o nov lado: \n ");
-					scanf("%f", &dim1);
-					obj->dim1 = dim1;
+					char choice;
+					printf("\nO que deseja alterar:\na)lado;\nb)Nome;\nc)pai na árvore;");
+					scanf("%c", &choice);
+					if (choice == 'a')
+					{
+						printf("Insira o novo lado: \n");
+						scanf("%f", &dim1);
+						obj->dim1 = dim1;
+					}
+					else if (choice == 'b')
+					{
+						printf("Insira o novo nome: \n ");
+						scanf("%s", nome);
+						strcpy(obj->nomeFigura,nome);
+						if (!strcmp(nome, "TRA"))
+						{
+							printf("Insira a base maior: \n");
+							scanf("%f", &dim1);
+							printf("Insira a base menor: \n ");
+							scanf("%f", &dim2);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim3);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = dim3;
+						}
+						else if (!strcmp(nome, "TRI"))
+						{
+							printf("Insira a base: \n ");
+							scanf("%f", &dim1);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim2);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "RET"))
+						{
+							printf("Insira a base: \n ");
+							scanf("%f", &dim1);
+							printf("Insira a altura: \n");
+							scanf("%f", &dim2);
+							obj -> dim1 = dim1;
+							obj -> dim2 = dim2;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "CIR"))
+						{
+							printf("Insira o raio: \n ");
+							scanf("%f", &dim1);
+							obj -> dim1 = dim1;
+							obj -> dim2 = 0;
+							obj -> dim3 = 0;
+						}
+						else if (!strcmp(nome, "QUA"))
+						{
+							printf("Insira o lado: \n ");
+							scanf("%f", &dim1);
+							obj -> dim1 = dim1;
+							obj -> dim2 = 0;
+							obj -> dim3 = 0;
+						}
+					}
+					else if (choice == 'c')
+					{
+						printf("Insira o código único do novo pai na árvore: \n");
+						scanf("%d", &idPai);
+						a = modificaPai(a, obj, idPai);
+					}
 				}
 			}
 		}
