@@ -404,14 +404,14 @@ TAB *v2ab(TFig **vet, int n, int t)
   return NULL;
 }
 
-TAB *g2AB(TAG *a, TFig **vetArvore, TAB *b, int t)
+TAB *g2AB(TAG *a, TFig **vetArvore, int t)
 {
   if (!a)
     return NULL;
   //versão 1: nao retiro da árvore original.
   int qteElem = conta(a);
-  if (!b)
-    b = criaAB(t);
+  // if (!b)
+  //   b = criaAB(t);
   //TAG ** vetArvore = (TAG**)malloc(sizeof(TAG*) * qteElem); parametrizar esse cara p facilitar o free. replicar o mesmo p arvg.c
   int i = 0;
   for (i; i < qteElem; i++)

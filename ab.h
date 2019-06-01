@@ -20,7 +20,7 @@ extern TAB *inicializa(void);
 extern TAB *divisao(TAB *x, int i, TAB* y, int t);
 extern TAB *insere_nao_completo(TAB *x, int id, char *nome, float dim1, float dim2, float dim3, int t);
 extern TAB *insereAB(TAB *T, int id, char *nome, float dim1, float dim2, float dim3, int t);
-extern TAB * g2AB (TAG *a, TFig **vetArvore, TAB *b,int t);
+extern TAB * g2AB (TAG *a, TFig **vetArvore,int t);
 extern int conta(TAG*a); //jogando o vetArvore p fora da função geradora
 void liberaVetFig(TFig **vet, int n);
 //extern TAB* remover(TAB* arv, int ch, int t);

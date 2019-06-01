@@ -35,7 +35,7 @@ int main()
 		float dim1 = 0, dim2 = 0, dim3 = 0;
 		char choice;
 		printf("\n\n");
-		printf("\nDigite 'a' para inserir um objeto na árvore\nDigite 'p' para imprimir detalhes de um objeto na arvore\nDigite 'P' para imprimir os objetos da árvore\nDigite 'm' para modificar as dimensões de um objeto\nDigite 'r' para remover um objeto da árvore\nDigite 't' para transformar a árvore genérica gerada em uma árvore binária de busca \nDigite 'b' para imprimir a árvore binária de busca gerada a partir da árvore genérica\nDigite 'B' para transformar a árvore genérica em uma árvore B\nDigite 'v' para imprimir a árvore B gerada a partir da árvore genérica\nDigite 's' para sair\n");
+		printf("\nDigite 'a' para inserir um objeto na árvore\nDigite 'p' para imprimir detalhes de um objeto na arvore\nDigite 'P' para imprimir os objetos da árvore\nDigite 'm' para modificar um objeto\nDigite 'r' para remover um objeto da árvore\nDigite 't' para transformar a árvore genérica gerada em uma árvore binária de busca \nDigite 'b' para imprimir a árvore binária de busca gerada a partir da árvore genérica\nDigite 'B' para transformar a árvore genérica em uma árvore B\nDigite 'v' para imprimir a árvore B gerada a partir da árvore genérica\nDigite 's' para sair\n");
 		scanf(" %c", &choice);
 		if (choice == 's')
 		{
@@ -197,9 +197,16 @@ int main()
 					}
 					else if (choice == 'e')
 					{
-						printf("Insira o código único do novo pai na árvore: \n");
-						scanf("%d", &idPai);
-						a = modificaPai(a, obj, idPai);
+						if (obj->idPai == 0)
+						{
+							printf("Objeto é raiz.\n");
+						}
+						else
+						{
+							printf("Insira o código único do novo pai na árvore: \n");
+							scanf("%d", &idPai);
+							a = modificaPai(a, obj, idPai);
+						}
 					}
 				}
 				else if (!strcmp(obj->nomeFigura, "TRI"))
@@ -287,9 +294,16 @@ int main()
 					}
 					else if (choice == 'd')
 					{
-						printf("Insira o código único do novo pai na árvore: \n");
-						scanf("%d", &idPai);
-						a = modificaPai(a, obj, idPai);
+						if (obj->idPai == 0)
+						{
+							printf("Objeto é raiz.\n");
+						}
+						else
+						{
+							printf("Insira o código único do novo pai na árvore: \n");
+							scanf("%d", &idPai);
+							a = modificaPai(a, obj, idPai);
+						}
 					}
 				}
 				else if (!strcmp(obj->nomeFigura, "RET"))
@@ -365,9 +379,16 @@ int main()
 					}
 					else if (choice == 'd')
 					{
-						printf("Insira o código único do novo pai na árvore: \n");
-						scanf("%d", &idPai);
-						a = modificaPai(a, obj, idPai);
+						if (obj->idPai == 0)
+						{
+							printf("Objeto é raiz.\n");
+						}
+						else
+						{
+							printf("Insira o código único do novo pai na árvore: \n");
+							scanf("%d", &idPai);
+							a = modificaPai(a, obj, idPai);
+						}
 					}
 				}
 				else if (!strcmp(obj->nomeFigura, "CIR"))
@@ -438,9 +459,16 @@ int main()
 					}
 					else if (choice == 'c')
 					{
-						printf("Insira o código único do novo pai na árvore: \n");
-						scanf("%d", &idPai);
-						a = modificaPai(a, obj, idPai);
+						if (obj->idPai == 0)
+						{
+							printf("Objeto é raiz.\n");
+						}
+						else
+						{
+							printf("Insira o código único do novo pai na árvore: \n");
+							scanf("%d", &idPai);
+							a = modificaPai(a, obj, idPai);
+						}
 					}
 				}
 				else if (!strcmp(obj->nomeFigura, "QUA"))
@@ -510,9 +538,16 @@ int main()
 					}
 					else if (choice == 'c')
 					{
-						printf("Insira o código único do novo pai na árvore: \n");
-						scanf("%d", &idPai);
-						a = modificaPai(a, obj, idPai);
+						if (obj->idPai == 0)
+						{
+							printf("Objeto é raiz.\n");
+						}
+						else
+						{
+							printf("Insira o código único do novo pai na árvore: \n");
+							scanf("%d", &idPai);
+							a = modificaPai(a, obj, idPai);
+						}
 					}
 				}
 			}
@@ -550,8 +585,7 @@ int main()
 			liberaABB(b);
 			if (a)
 			{
-				b = criaABB();
-				b = g2b(a, b);
+				b = g2b(a);
 			}
 			else
 				printf("Árvore genérica vazia!");
@@ -560,7 +594,7 @@ int main()
 		else if (choice == 'b')
 		{
 			if (b)
-				imprimeABB(b);
+				imprimeABB(b, 1);
 			else
 				printf("Árvore de busca binária correspondente vazia!");
 		}
@@ -571,18 +605,12 @@ int main()
 			scanf("%d", &t);
 			if (a)
 			{
-				// if (c)
-				// {
-				// 	printf("Pointer: %p", c);
 				c = liberaAB(c);
-				// 	printf("Pointer: %p", c);
-				// }
-				// c = NULL;
 				int qte = conta(a);
 				TFig **vet = (TFig **)malloc(sizeof(TFig *) * qte);
 
-				c = criaAB(t);
-				c = g2AB(a, vet, c, t);
+				// c = criaAB(t);
+				c = g2AB(a, vet, t);
 				liberaVetFig(vet, qte);
 			}
 			else
@@ -596,6 +624,5 @@ int main()
 				printf("Árvore B vazia!");
 		}
 	} while (1);
-	//libera(a);
 	return 0;
 }

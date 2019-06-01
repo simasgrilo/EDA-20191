@@ -13,7 +13,7 @@ typedef struct abb
 extern TABB *criaABB(void);
 extern TABB *buscaABB(TABB *a, int idPai);
 extern TABB *insereABB(TABB *a, int id, char *nome, float dim1, float dim2, float dim3);
-extern void imprimeABB(TABB *a);
+extern void imprimeABB(TABB *a, int altura);
 //extern void imprimeFigura(TABB *a);
 //extern TABB *retira(TABB *a, int id);
 extern void liberaABB(TABB *a);
