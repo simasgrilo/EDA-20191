@@ -27,7 +27,7 @@ int main()
 		printf("Digite o nome do arquivo de entrada:");
 		scanf("%s", arq);
 		a = ler_de_arquivo(arq, a);
-		imprime(a,0);
+		imprime(a, 0);
 	}
 
 	do
@@ -145,7 +145,7 @@ int main()
 					{
 						printf("Insira o novo nome: \n ");
 						scanf("%s", nome);
-						strcpy(obj->nomeFigura,nome);
+						strcpy(obj->nomeFigura, nome);
 						if (!strcmp(nome, "TRA"))
 						{
 							printf("Insira a base maior: \n");
@@ -154,9 +154,9 @@ int main()
 							scanf("%f", &dim2);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim3);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = dim3;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = dim3;
 						}
 						else if (!strcmp(nome, "TRI"))
 						{
@@ -164,9 +164,9 @@ int main()
 							scanf("%f", &dim1);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "RET"))
 						{
@@ -174,25 +174,25 @@ int main()
 							scanf("%f", &dim1);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "CIR"))
 						{
 							printf("Insira o raio: \n ");
 							scanf("%f", &dim1);
-							obj -> dim1 = dim1;
-							obj -> dim2 = 0;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = 0;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "QUA"))
 						{
 							printf("Insira o lado: \n ");
 							scanf("%f", &dim1);
-							obj -> dim1 = dim1;
-							obj -> dim2 = 0;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = 0;
+							obj->dim3 = 0;
 						}
 					}
 					else if (choice == 'e')
@@ -235,7 +235,7 @@ int main()
 					{
 						printf("Insira o novo nome: \n ");
 						scanf("%s", nome);
-						strcpy(obj->nomeFigura,nome);
+						strcpy(obj->nomeFigura, nome);
 						if (!strcmp(nome, "TRA"))
 						{
 							printf("Insira a base maior: \n");
@@ -244,9 +244,9 @@ int main()
 							scanf("%f", &dim2);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim3);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = dim3;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = dim3;
 						}
 						else if (!strcmp(nome, "TRI"))
 						{
@@ -254,9 +254,9 @@ int main()
 							scanf("%f", &dim1);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "RET"))
 						{
@@ -264,25 +264,25 @@ int main()
 							scanf("%f", &dim1);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "CIR"))
 						{
 							printf("Insira o raio: \n ");
 							scanf("%f", &dim1);
-							obj -> dim1 = dim1;
-							obj -> dim2 = 0;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = 0;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "QUA"))
 						{
 							printf("Insira o lado: \n ");
 							scanf("%f", &dim1);
-							obj -> dim1 = dim1;
-							obj -> dim2 = 0;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = 0;
+							obj->dim3 = 0;
 						}
 					}
 					else if (choice == 'd')
@@ -313,7 +313,7 @@ int main()
 					{
 						printf("Insira o novo nome: \n ");
 						scanf("%s", nome);
-						strcpy(obj->nomeFigura,nome);
+						strcpy(obj->nomeFigura, nome);
 						if (!strcmp(nome, "TRA"))
 						{
 							printf("Insira a base maior: \n");
@@ -322,9 +322,9 @@ int main()
 							scanf("%f", &dim2);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim3);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = dim3;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = dim3;
 						}
 						else if (!strcmp(nome, "TRI"))
 						{
@@ -332,9 +332,9 @@ int main()
 							scanf("%f", &dim1);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "RET"))
 						{
@@ -342,25 +342,25 @@ int main()
 							scanf("%f", &dim1);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "CIR"))
 						{
 							printf("Insira o raio: \n ");
 							scanf("%f", &dim1);
-							obj -> dim1 = dim1;
-							obj -> dim2 = 0;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = 0;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "QUA"))
 						{
 							printf("Insira o lado: \n ");
 							scanf("%f", &dim1);
-							obj -> dim1 = dim1;
-							obj -> dim2 = 0;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = 0;
+							obj->dim3 = 0;
 						}
 					}
 					else if (choice == 'd')
@@ -386,7 +386,7 @@ int main()
 					{
 						printf("Insira o novo nome: \n ");
 						scanf("%s", nome);
-						strcpy(obj->nomeFigura,nome);
+						strcpy(obj->nomeFigura, nome);
 						if (!strcmp(nome, "TRA"))
 						{
 							printf("Insira a base maior: \n");
@@ -395,9 +395,9 @@ int main()
 							scanf("%f", &dim2);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim3);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = dim3;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = dim3;
 						}
 						else if (!strcmp(nome, "TRI"))
 						{
@@ -405,9 +405,9 @@ int main()
 							scanf("%f", &dim1);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "RET"))
 						{
@@ -415,25 +415,25 @@ int main()
 							scanf("%f", &dim1);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "CIR"))
 						{
 							printf("Insira o raio: \n ");
 							scanf("%f", &dim1);
-							obj -> dim1 = dim1;
-							obj -> dim2 = 0;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = 0;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "QUA"))
 						{
 							printf("Insira o lado: \n ");
 							scanf("%f", &dim1);
-							obj -> dim1 = dim1;
-							obj -> dim2 = 0;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = 0;
+							obj->dim3 = 0;
 						}
 					}
 					else if (choice == 'c')
@@ -442,7 +442,6 @@ int main()
 						scanf("%d", &idPai);
 						a = modificaPai(a, obj, idPai);
 					}
-					
 				}
 				else if (!strcmp(obj->nomeFigura, "QUA"))
 				{
@@ -459,7 +458,7 @@ int main()
 					{
 						printf("Insira o novo nome: \n ");
 						scanf("%s", nome);
-						strcpy(obj->nomeFigura,nome);
+						strcpy(obj->nomeFigura, nome);
 						if (!strcmp(nome, "TRA"))
 						{
 							printf("Insira a base maior: \n");
@@ -468,9 +467,9 @@ int main()
 							scanf("%f", &dim2);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim3);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = dim3;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = dim3;
 						}
 						else if (!strcmp(nome, "TRI"))
 						{
@@ -478,9 +477,9 @@ int main()
 							scanf("%f", &dim1);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "RET"))
 						{
@@ -488,25 +487,25 @@ int main()
 							scanf("%f", &dim1);
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
-							obj -> dim1 = dim1;
-							obj -> dim2 = dim2;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = dim2;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "CIR"))
 						{
 							printf("Insira o raio: \n ");
 							scanf("%f", &dim1);
-							obj -> dim1 = dim1;
-							obj -> dim2 = 0;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = 0;
+							obj->dim3 = 0;
 						}
 						else if (!strcmp(nome, "QUA"))
 						{
 							printf("Insira o lado: \n ");
 							scanf("%f", &dim1);
-							obj -> dim1 = dim1;
-							obj -> dim2 = 0;
-							obj -> dim3 = 0;
+							obj->dim1 = dim1;
+							obj->dim2 = 0;
+							obj->dim3 = 0;
 						}
 					}
 					else if (choice == 'c')
@@ -572,8 +571,13 @@ int main()
 			scanf("%d", &t);
 			if (a)
 			{
-				//if(c)
-				//	c =liberaAB(c); vai quebrar
+				// if (c)
+				// {
+				// 	printf("Pointer: %p", c);
+				c = liberaAB(c);
+				// 	printf("Pointer: %p", c);
+				// }
+				// c = NULL;
 				int qte = conta(a);
 				TFig **vet = (TFig **)malloc(sizeof(TFig *) * qte);
 
