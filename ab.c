@@ -14,7 +14,7 @@ TAB *criaAB(int t){
   novo->t = t;
   int i;
   for(i=0; i<(t*2); i++) novo->filho[i] = NULL;
-  //for(i=0; i < t; i++) novo -> figs[i] = NULL; isso provoca segfault na inserção
+  //for(i=0; i < t; i++) novo -> figs[i] = NULL; //isso provoca segfault na inserção
   return novo;
 }
 
@@ -25,7 +25,10 @@ TAB *liberaAB(TAB *a){
     if(!a->folha){     
       for(i = 0; i <= a->nchaves; i++) liberaAB(a->filho[i]);
     }	
-	//for(i = 0; i < a -> nchaves; i++) if(a -> figs[i]) free(a -> figs[i]);
+	for(i = 0; i < ((a->t*2)-1); i++) if(a -> figs[i]){
+		free(a -> figs[i]); //isso quebra em qqr situação
+		printf("passou %d",i);
+	}
 	//liberaVetFig(a->figs,a->t);
     free(a->figs);
     free(a->filho);
@@ -69,7 +72,7 @@ TAB *divisao(TAB *x, int i, TAB* y, int t){
   z->nchaves= t - 1;
   z->folha = y->folha;
   int j;
-  for(j=0;j<t-1;j++) z->figs[j] = y->figs[j+t];
+  for(j=0;j<t-1;j++) if(y->figs[j+t]) z->figs[j] = y->figs[j+t];
   if(!y->folha){
     for(j=0;j<t;j++){
       z->filho[j] = y->filho[j+t];
@@ -79,7 +82,7 @@ TAB *divisao(TAB *x, int i, TAB* y, int t){
   y->nchaves = t-1;
   for(j=x->nchaves; j>=i; j--) x->filho[j+1]=x->filho[j];
   x->filho[i] = z;
-  for(j=x->nchaves; j>=i; j--) x->figs[j] = x->figs[j-1];
+  for(j=x->nchaves; j>=i; j--) if (x->figs[j-1]) x->figs[j] = x->figs[j-1];
   x->figs[i-1] = y->figs[t-1];
   x->nchaves++;
   return x;
@@ -117,6 +120,7 @@ TAB *insere_nao_completo(TAB *x, int id, char *nome, float dim1, float dim2, flo
 TAB *insereAB(TAB *T, int id, char *nome, float dim1, float dim2, float dim3, int t){
   if(buscaAB(T,id)) return T;
   if(!T){
+	//printf("rosquinha\n");
     T=criaAB(t);
     T->figs[0] -> id = id;
 	strcpy(T->figs[0] -> nome, nome);
@@ -127,6 +131,7 @@ TAB *insereAB(TAB *T, int id, char *nome, float dim1, float dim2, float dim3, in
     return T;
   }
   if(T->nchaves == (2*t)-1){
+	//printf("red\n");
     TAB *S = criaAB(t);
     S->nchaves=0;
     S->folha = 0;
@@ -135,6 +140,7 @@ TAB *insereAB(TAB *T, int id, char *nome, float dim1, float dim2, float dim3, in
     S = insere_nao_completo(S,id, nome, dim1, dim2, dim3,t);
     return S;
   }
+	//printf("corvette\n");
   T = insere_nao_completo(T,id, nome, dim1, dim2, dim3,t);
   return T;
 }
@@ -321,7 +327,7 @@ void addVetorAB(TAG *a, TFig**vetor, int i){
 
 }
 
-/*void ordenaAB(TFig **vet, int n){
+void ordenaAB(TFig **vet, int n){
 	if(!vet) return;
 	int i = 0;
 	for(i; i < n; i++){
@@ -335,7 +341,7 @@ void addVetorAB(TAG *a, TFig**vetor, int i){
 			vet[i] = temp;
 		}
 	}
-}*/
+}
 
 TAB * v2ab (TFig **vet, int n,int t){
 	if(n > 0){
@@ -361,7 +367,7 @@ TAB * g2AB (TAG *a, TFig **vetArvore, TAB *b,int t){
 		vetArvore[i] = NULL;
 	}
 	addVetorAB(a,vetArvore,0);
-	//ordenaAB(vetArvore,qteElem);
+	ordenaAB(vetArvore,qteElem);
 	return v2ab(vetArvore,qteElem,t);
 }
 

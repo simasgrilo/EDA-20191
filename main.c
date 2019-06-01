@@ -27,6 +27,7 @@ int main()
 		printf("Digite o nome do arquivo de entrada:");
 		scanf("%s", arq);
 		a = ler_de_arquivo(arq, a);
+		imprime(a,0);
 	}
 
 	do
@@ -115,12 +116,12 @@ int main()
 				printf("objeto com código único %d não encontrado", id);
 			else
 			{
-				char choice = ' ';
+				char choice;
 				imprimeFigura(obj);
 				if (!strcmp(obj->nomeFigura, "TRA"))
 				{
 					//char choice;
-					printf("\nO que deseja alterar:\na)base maior;\nb)base menor;\nc)Altura;\nd)Nome;\ne)pai na árvore");
+					printf("\nO que deseja alterar:\na)base maior;\nb)base menor;\nc)Altura;\nd)Nome;\ne)pai na árvore\n");
 					scanf(" %c", &choice);
 					if (choice == 'a')
 					{
@@ -204,7 +205,7 @@ int main()
 				else if (!strcmp(obj->nomeFigura, "TRI"))
 				{
 					//char choice;
-					printf("\nO que deseja alterar:\na)base;\nb)altura;\nc)Nome;\nd)pai na árvore");
+					printf("\nO que deseja alterar:\na)base;\nb)altura;\nc)Nome;\nd)pai na árvore\n");
 					scanf(" %c", &choice);
 					/*if (choice == 'a')
 					{
@@ -294,7 +295,7 @@ int main()
 				else if (!strcmp(obj->nomeFigura, "RET"))
 				{
 					//char choice;
-					printf("\nO que deseja alterar:\na)base;\nb)altura;\nc)Nome;\nd)pai na árvore");
+					printf("\nO que deseja alterar:\na)base;\nb)altura;\nc)Nome;\nd)pai na árvore\n");
 					scanf(" %c", &choice);
 					if (choice == 'a')
 					{
@@ -372,9 +373,9 @@ int main()
 				else if (!strcmp(obj->nomeFigura, "CIR"))
 				{
 					//printf("Insira o novo raio: \n ");
-					printf("\nO que deseja alterar:\na)base\nb)Nome;\nc)pai na árvore");
-					//char choice;
-					scanf("%c", &choice);
+					printf("\nO que deseja alterar:\na)Raio\nb)Nome;\nc)Pai na árvore\n");
+					scanf(" %c", &choice);
+
 					if (choice == 'a')
 					{
 						printf("Insira a nova base maior: \n");
@@ -446,8 +447,8 @@ int main()
 				else if (!strcmp(obj->nomeFigura, "QUA"))
 				{
 					char choice;
-					printf("\nO que deseja alterar:\na)lado;\nb)Nome;\nc)pai na árvore;");
-					scanf("%c", &choice);
+					printf("\nO que deseja alterar:\na)lado;\nb)Nome;\nc)pai na árvore;\n");
+					scanf(" %c", &choice);
 					if (choice == 'a')
 					{
 						printf("Insira o novo lado: \n");
@@ -547,6 +548,7 @@ int main()
 		}
 		else if (choice == 't')
 		{
+			liberaABB(b);
 			if (a)
 			{
 				b = criaABB();
@@ -570,8 +572,11 @@ int main()
 			scanf("%d", &t);
 			if (a)
 			{
+				//if(c)
+				//	c =liberaAB(c); vai quebrar
 				int qte = conta(a);
 				TFig **vet = (TFig **)malloc(sizeof(TFig *) * qte);
+
 				c = criaAB(t);
 				c = g2AB(a, vet, c, t);
 				liberaVetFig(vet, qte);
