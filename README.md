@@ -3,7 +3,4 @@ Trabalho computacional para a disciplina de Estruturas de Dados e Algoritmos - P
 
 Forma de compilar: makefile (executado gerado com nome main).
 
-Dúvidas:
-Forçado a por entrada?
-Raíz não tem irmão?
-Impressão com detalhes para abb e árvore B?
+Créditos à Daniel-02 por catar todos os memory leaks e salvar a firma. Esse ai é o melhor
