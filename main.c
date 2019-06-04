@@ -27,6 +27,10 @@ int main()
 		printf("Digite o nome do arquivo de entrada:");
 		scanf("%s", arq);
 		a = ler_de_arquivo(arq, a);
+		if (!a)
+		{
+			printf("Primeiro elemento não é uma raíz.\n");
+		}
 		imprime(a, 0);
 	}
 

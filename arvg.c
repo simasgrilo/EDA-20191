@@ -37,24 +37,37 @@ TAG *insere(TAG *a, int id, int idPai, char *nome, float dim1, float dim2, float
 { //C acho que nao deixa parametro opcional, se nao tiver o terceiro apenas cagar p isso na main.
 	if (!a)
 	{
-		TAG *novo = cria();
-		strcpy(novo->nomeFigura, nome);
-		novo->id = id;
-		novo->idPai = idPai;
-		//abordagem mais preguiçosa: verificar se o dado foi efetivamente passado como parâmetro. caso contrario, cravar na função que chamar a insere como 0.
-		if (dim1)
-			novo->dim1 = dim1;
-		if (dim2)
-			novo->dim2 = dim2;
-		if (dim3)
-			novo->dim3 = dim3;
-		return novo;
+		if (idPai == 0)
+		{
+			TAG *novo = cria();
+			strcpy(novo->nomeFigura, nome);
+			novo->id = id;
+			novo->idPai = idPai;
+			//abordagem mais preguiçosa: verificar se o dado foi efetivamente passado como parâmetro. caso contrario, cravar na função que chamar a insere como 0.
+			if (dim1)
+				novo->dim1 = dim1;
+			if (dim2)
+				novo->dim2 = dim2;
+			if (dim3)
+				novo->dim3 = dim3;
+			return novo;
+		}
+		else
+		{
+			printf("Raíz não inserida.\n");
+			return NULL;
+		}
 	}
 	//verifico se já existe algúem com meu código único
 	TAG *no = busca(a, id);
 	if (no)
 	{
 		printf("Já existe um elemento na árvore com código %d! \n", id);
+		return a;
+	}
+	if (idPai == 0)
+	{
+		printf("Raíz já inserida.\n");
 		return a;
 	}
 	if (!idPai)
@@ -365,6 +378,11 @@ TAG *ler_de_arquivo(char *nome1, TAG *a)
 		if (strlen(linha) > 8)
 		{
 			a = insere(a, id, idPai, nome, dim1, dim2, dim3);
+			if (!a)
+			{
+				fclose(f);
+				return NULL;
+			}
 		}
 	}
 	fclose(f);
