@@ -70,34 +70,79 @@ int main()
 				{
 					printf("Insira a base maior: \n");
 					scanf("%f", &dim1);
+					while(dim1 <= 0)
+					{
+						printf("Medida inválida! Por favor, insira um valor maior que 0");
+						scanf("%f",&dim1);
+					}
 					printf("Insira a base menor: \n ");
 					scanf("%f", &dim2);
+					while(dim2 <= 0)
+					{
+						printf("Medida inválida! Por favor, insira um valor maior que 0");
+						scanf("%f",&dim2);
+					}
 					printf("Insira a altura: \n");
 					scanf("%f", &dim3);
+					while(dim3 <= 0)
+					{
+						printf("Medida inválida! Por favor, insira um valor maior que 0");
+						scanf("%f",&dim3);
+					}
 				}
 				else if (!strcmp(nome, "TRI"))
 				{
 					printf("Insira a base: \n ");
 					scanf("%f", &dim1);
+					while(dim1 <= 0)
+					{
+						printf("Medida inválida! Por favor, insira um valor maior que 0");
+						scanf("%f",&dim1);
+					}
 					printf("Insira a altura: \n");
 					scanf("%f", &dim2);
+					while(dim2 <= 0)
+					{
+						printf("Medida inválida! Por favor, insira um valor maior que 0");
+						scanf("%f",&dim2);
+					}
 				}
 				else if (!strcmp(nome, "RET"))
 				{
 					printf("Insira a base: \n ");
 					scanf("%f", &dim1);
+					while(dim1 <= 0)
+					{
+						printf("Medida inválida! Por favor, insira um valor maior que 0");
+						scanf("%f",&dim1);
+					}
 					printf("Insira a altura: \n");
 					scanf("%f", &dim2);
+					while(dim2 <= 0)
+					{
+						printf("Medida inválida! Por favor, insira um valor maior que 0");
+						scanf("%f",&dim2);
+					}
 				}
 				else if (!strcmp(nome, "CIR"))
 				{
 					printf("Insira o raio: \n ");
 					scanf("%f", &dim1);
+					while(dim1 <= 0)
+					{
+						printf("Medida inválida! Por favor, insira um valor maior que 0");
+						scanf("%f",&dim1);
+					}
 				}
 				else if (!strcmp(nome, "QUA"))
 				{
 					printf("Insira o lado: \n ");
 					scanf("%f", &dim1);
+					while(dim1 <= 0)
+					{
+						printf("Medida inválida! Por favor, insira um valor maior que 0");
+						scanf("%f",&dim1);
+					}
 				}
 				else
 				{
@@ -131,72 +176,140 @@ int main()
 					{
 						printf("Insira a nova base maior: \n");
 						scanf("%f", &dim1);
+						while(dim1 <= 0)
+						{
+							printf("Medida inválida! Por favor, insira um valor maior que 0");
+							scanf("%f",&dim1);
+						}
 						obj->dim1 = dim1;
 					}
 					else if (choice == 'b')
 					{
 						printf("Insira a nova base menor: \n ");
 						scanf("%f", &dim2);
+						while(dim2 <= 0)
+						{
+							printf("Medida inválida! Por favor, insira um valor maior que 0");
+							scanf("%f",&dim2);
+						}
 						obj->dim2 = dim2;
 					}
 					else if (choice == 'c')
 					{
 						printf("Insira a nova altura: \n");
 						scanf("%f", &dim3);
+						while(dim3 <= 0)
+						{
+							printf("Medida inválida! Por favor, insira um valor maior que 0");
+							scanf("%f",&dim3);
+						}
 						obj->dim3 = dim3;
 					}
 					else if (choice == 'd')
 					{
 						printf("Insira o novo nome: \n ");
 						scanf("%s", nome);
-						strcpy(obj->nomeFigura, nome);
 						if (!strcmp(nome, "TRA"))
 						{
 							printf("Insira a base maior: \n");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a base menor: \n ");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim3);
+							while(dim3 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim3);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = dim3;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "TRI"))
 						{
 							printf("Insira a base: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "RET"))
 						{
 							printf("Insira a base: \n ");
 							scanf("%f", &dim1);
+							while(dim1<= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "CIR"))
 						{
 							printf("Insira o raio: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = 0;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "QUA"))
 						{
 							printf("Insira o lado: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = 0;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
+						}
+						else
+						{
+							printf("Nome de figura inválida!");
 						}
 					}
 					else if (choice == 'e')
@@ -234,66 +347,129 @@ int main()
 					{
 						printf("Insira a nova base: \n");
 						scanf("%f", &dim1);
+						while(dim1 <= 0)
+						{
+							printf("Medida inválida! Por favor, insira um valor maior que 0");
+							scanf("%f",&dim1);
+						}
 						obj->dim1 = dim1;
 					}
 					else if (choice == 'b')
 					{
 						printf("Insira a nova altura: \n ");
 						scanf("%f", &dim2);
+						while(dim2 <= 0)
+						{
+							printf("Medida inválida! Por favor, insira um valor maior que 0");
+							scanf("%f",&dim2);
+						}
 						obj->dim2 = dim2;
 					}
 					else if (choice == 'c')
 					{
 						printf("Insira o novo nome: \n ");
 						scanf("%s", nome);
-						strcpy(obj->nomeFigura, nome);
 						if (!strcmp(nome, "TRA"))
 						{
 							printf("Insira a base maior: \n");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a base menor: \n ");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim3);
+							while(dim3 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim3);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = dim3;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "TRI"))
 						{
 							printf("Insira a base: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "RET"))
 						{
 							printf("Insira a base: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "CIR"))
 						{
 							printf("Insira o raio: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = 0;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "QUA"))
 						{
 							printf("Insira o lado: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = 0;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
+						}
+						else
+						{
+							printf("Nome de figura inválida!");
 						}
 					}
 					else if (choice == 'd')
@@ -319,66 +495,129 @@ int main()
 					{
 						printf("Insira a nova base: \n");
 						scanf("%f", &dim1);
+						while(dim1 <= 0)
+						{
+							printf("Medida inválida! Por favor, insira um valor maior que 0");
+							scanf("%f",&dim1);
+						}
 						obj->dim1 = dim1;
 					}
 					else if (choice == 'b')
 					{
 						printf("Insira a nova altura: \n ");
 						scanf("%f", &dim2);
+						while(dim2 <= 0)
+						{
+							printf("Medida inválida! Por favor, insira um valor maior que 0");
+							scanf("%f",&dim2);
+						}
 						obj->dim2 = dim2;
 					}
 					else if (choice == 'c')
 					{
 						printf("Insira o novo nome: \n ");
 						scanf("%s", nome);
-						strcpy(obj->nomeFigura, nome);
 						if (!strcmp(nome, "TRA"))
 						{
 							printf("Insira a base maior: \n");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a base menor: \n ");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim3);
+							while(dim3 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim3);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = dim3;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "TRI"))
 						{
 							printf("Insira a base: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "RET"))
 						{
 							printf("Insira a base: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "CIR"))
 						{
 							printf("Insira o raio: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = 0;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "QUA"))
 						{
 							printf("Insira o lado: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = 0;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
+						}
+						else
+						{
+							printf("Nome de figura inválida!");
 						}
 					}
 					else if (choice == 'd')
@@ -405,60 +644,118 @@ int main()
 					{
 						printf("Insira a nova base maior: \n");
 						scanf("%f", &dim1);
+						while(dim1 <= 0)
+						{
+							printf("Medida inválida! Por favor, insira um valor maior que 0");
+							scanf("%f",&dim1);
+						}
 						obj->dim1 = dim1;
 					}
 					else if (choice == 'b')
 					{
 						printf("Insira o novo nome: \n ");
 						scanf("%s", nome);
-						strcpy(obj->nomeFigura, nome);
 						if (!strcmp(nome, "TRA"))
 						{
 							printf("Insira a base maior: \n");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a base menor: \n ");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim3);
+							while(dim3 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim3);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = dim3;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "TRI"))
 						{
 							printf("Insira a base: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "RET"))
 						{
 							printf("Insira a base: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "CIR"))
 						{
 							printf("Insira o raio: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = 0;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "QUA"))
 						{
 							printf("Insira o lado: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = 0;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
+						}
+						else
+						{
+							printf("Nome de figura inválida!");
 						}
 					}
 					else if (choice == 'c')
@@ -484,60 +781,114 @@ int main()
 					{
 						printf("Insira o novo lado: \n");
 						scanf("%f", &dim1);
+						while(dim1 <= 0)
+						{
+							printf("Medida inválida! Por favor, insira um valor maior que 0");
+							scanf("%f",&dim1);
+						}
 						obj->dim1 = dim1;
 					}
 					else if (choice == 'b')
 					{
 						printf("Insira o novo nome: \n ");
 						scanf("%s", nome);
-						strcpy(obj->nomeFigura, nome);
 						if (!strcmp(nome, "TRA"))
 						{
 							printf("Insira a base maior: \n");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a base menor: \n ");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim3);
+							while(dim3 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim3);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = dim3;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "TRI"))
 						{
 							printf("Insira a base: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "RET"))
 						{
 							printf("Insira a base: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							printf("Insira a altura: \n");
 							scanf("%f", &dim2);
+							while(dim2 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim2);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = dim2;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "CIR"))
 						{
 							printf("Insira o raio: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = 0;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 						else if (!strcmp(nome, "QUA"))
 						{
 							printf("Insira o lado: \n ");
 							scanf("%f", &dim1);
+							while(dim1 <= 0)
+							{
+								printf("Medida inválida! Por favor, insira um valor maior que 0");
+								scanf("%f",&dim1);
+							}
 							obj->dim1 = dim1;
 							obj->dim2 = 0;
 							obj->dim3 = 0;
+							strcpy(obj->nomeFigura, nome);
 						}
 					}
 					else if (choice == 'c')
